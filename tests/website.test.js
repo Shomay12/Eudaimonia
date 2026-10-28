@@ -119,7 +119,8 @@ test("3. HTML Structure, Copy & Semantic Requirements", () => {
   assert.ok(html.includes("@shomay12"), "Must include creator handle @shomay12");
   assert.ok(html.includes("https://github.com/shomay12"), "Must link to creator profile https://github.com/shomay12");
   assert.ok(html.includes("shomaysinghparihar.online"), "Must link to personal website shomaysinghparihar.online");
-  assert.ok(html.includes("me.html"), "Must link to me.html (About Me dossier page)");
+  assert.ok(html.includes("me.html"), "Must link to me.html (Meet Devloper dossier page)");
+  assert.ok(html.includes("Meet Devloper"), "Must have 'Meet Devloper' button/link");
 
   // Me Page Verification
   assert.ok(meHtml.includes("Shomay Singh Parihar"), "me.html must credit Shomay Singh Parihar");

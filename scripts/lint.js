@@ -29,7 +29,7 @@ const indexPath = path.join(ROOT_DIR, "index.html");
 report(fs.existsSync(indexPath), "index.html exists");
 
 const mePath = path.join(ROOT_DIR, "me.html");
-report(fs.existsSync(mePath), "me.html (About Me / Creator dossier) exists");
+report(fs.existsSync(mePath), "me.html (Meet Devloper / Creator dossier) exists");
 
 const html = fs.readFileSync(indexPath, "utf-8");
 const meHtml = fs.readFileSync(mePath, "utf-8");
