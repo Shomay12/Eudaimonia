@@ -4,8 +4,8 @@
   "description": "Keyboard-First Market Intelligence and Options Trading Terminal for Indian Financial Markets",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0B0D0F",
-  "theme_color": "#0B0D0F",
+  "background_color": "#F7F5F0",
+  "theme_color": "#F7F5F0",
   "icons": [
     {
       "src": "/public/favicon.svg",

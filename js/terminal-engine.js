@@ -389,3 +389,4 @@ export function generateMarketDepth(spot = 24852.15) {
     totalAskQty,
   };
 }
+

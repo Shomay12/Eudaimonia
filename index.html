@@ -9,7 +9,7 @@
   <meta name="description" content="Keyboard-first market intelligence and options trading terminal for Indian financial markets (NSE & BSE). Real-time options chains, Black-Scholes Greeks, 5-depth order books, and candlestick charts.">
   <meta name="author" content="Shomay Singh Parihar">
   <meta name="keywords" content="Eudaimonia, market intelligence, Indian markets, NSE, BSE, options chain, Black-Scholes, Greeks, trading terminal, NIFTY, order book, candlestick chart">
-  <meta name="theme-color" content="#0B0D0F">
+  <meta name="theme-color" content="#F7F5F0">
 
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website">
@@ -25,6 +25,11 @@
   <meta name="twitter:image" content="/public/og-image.svg">
   <meta name="twitter:creator" content="@shomay12">
 
+  <!-- Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
   <!-- Favicon & Manifest -->
   <link rel="icon" type="image/svg+xml" href="/public/favicon.svg">
   <link rel="manifest" href="/public/manifest.json">
@@ -37,6 +42,27 @@
   <!-- Accessibility Skip Link -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
+  <!-- Top Running Ticker Tape (Marquee Across Indian Markets) -->
+  <aside class="ticker-strip" aria-label="Live Market Feed Ticker">
+    <div class="ticker-track">
+      <span class="ticker-item-inline"><strong>NSE:NIFTY 50</strong> 24,852.15 <span class="ticker-up">+118.40 (+0.48%)</span></span>
+      <span class="ticker-item-inline"><strong>NSE:BANKNIFTY</strong> 51,920.80 <span class="ticker-up">+342.10 (+0.66%)</span></span>
+      <span class="ticker-item-inline"><strong>BSE:SENSEX</strong> 81,410.25 <span class="ticker-up">+412.30 (+0.51%)</span></span>
+      <span class="ticker-item-inline"><strong>INDIA VIX</strong> 12.45 <span class="ticker-down">-0.32 (-2.51%)</span></span>
+      <span class="ticker-item-inline"><strong>NSE:RELIANCE</strong> 3,042.50 <span class="ticker-up">+22.10 (+0.73%)</span></span>
+      <span class="ticker-item-inline"><strong>NSE:HDFCBANK</strong> 1,685.20 <span class="ticker-up">+14.80 (+0.89%)</span></span>
+      <span class="ticker-item-inline"><strong>NSE:INFY</strong> 1,894.10 <span class="ticker-down">-8.30 (-0.44%)</span></span>
+      <span class="ticker-item-inline"><strong>NSE:TCS</strong> 4,215.00 <span class="ticker-up">+31.50 (+0.75%)</span></span>
+      <span class="ticker-item-inline"><strong>KEYBOARD-FIRST TERMINAL</strong> PRESS &lsquo;:&rsquo; FOR COMMAND PROMPT</span>
+      <span class="ticker-item-inline"><strong>ZERO BLOAT</strong> NO TESTIMONIALS · NO TRACKING · 100% DETERMINISTIC</span>
+      <!-- Seamless loop repetition -->
+      <span class="ticker-item-inline"><strong>NSE:NIFTY 50</strong> 24,852.15 <span class="ticker-up">+118.40 (+0.48%)</span></span>
+      <span class="ticker-item-inline"><strong>NSE:BANKNIFTY</strong> 51,920.80 <span class="ticker-up">+342.10 (+0.66%)</span></span>
+      <span class="ticker-item-inline"><strong>BSE:SENSEX</strong> 81,410.25 <span class="ticker-up">+412.30 (+0.51%)</span></span>
+      <span class="ticker-item-inline"><strong>INDIA VIX</strong> 12.45 <span class="ticker-down">-0.32 (-2.51%)</span></span>
+    </div>
+  </aside>
+
   <!-- ========================================================================
        Navigation Bar
        ======================================================================== -->
@@ -44,7 +70,7 @@
     <div class="container-wide nav-container">
       <a href="/" class="brand-link" aria-label="Eudaimonia Home">
         <span class="brand-wordmark">EUDAIMONIA</span>
-        <span class="brand-tag">TERMINAL</span>
+        <span class="brand-chip">TERMINAL V0.1.0</span>
       </a>
 
       <nav class="nav-menu" role="navigation" aria-label="Primary Navigation">
@@ -56,7 +82,9 @@
       </nav>
 
       <div class="nav-actions">
-        <a href="#quickstart" class="nav-btn nav-btn-primary">Get Started</a>
+        <div class="magnetic-wrap">
+          <a href="#quickstart" class="btn btn-primary">Get Started</a>
+        </div>
         <button type="button" class="mobile-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
           [MENU]
         </button>
@@ -70,336 +98,326 @@
   <main id="main-content" role="main">
 
     <!-- ====================================================================
-         Hero Section
+         Hero Section: Asymmetric, Editorial, Tactile
          ==================================================================== -->
     <section class="hero-section" aria-labelledby="hero-title">
-      <div class="container">
-        <div class="hero-content">
-          <div class="hero-eyebrow">
-            <span>NSE / BSE Derivative Analytics</span>
-            <span class="eyebrow-divider">/</span>
-            <span>Keyboard-First Architecture</span>
-          </div>
-
-          <h1 id="hero-title" class="hero-headline">The markets, without the noise.</h1>
-
-          <p class="hero-description">
-            Eudaimonia is a keyboard-first market intelligence terminal for Indian markets.
-            Explore options chains, monitor market movements, and study price action
-            through a focused, data-driven interface.
-          </p>
-
-          <div class="hero-ctas">
-            <a href="#preview" class="btn btn-primary">Explore the Terminal</a>
-            <a href="https://github.com/shomay12" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-          </div>
-
-          <div class="hero-metadata-strip">
-            <div class="metadata-item">
-              <span class="meta-bullet">■</span>
-              <span>National Stock Exchange &amp; Bombay Stock Exchange</span>
-            </div>
-            <div class="metadata-item">
-              <span class="meta-bullet">■</span>
-              <span>Analytical Black-Scholes Greeks</span>
-            </div>
-            <div class="metadata-item">
-              <span class="meta-bullet">■</span>
-              <span>Level-2 5-Depth Order Books</span>
-            </div>
-            <div class="metadata-item">
-              <span class="meta-bullet">■</span>
-              <span>Zero Bloat · Zero Tracking</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         Product Interface Preview (Interactive Terminal Centerpiece)
-         ==================================================================== -->
-    <section id="preview" class="preview-section" aria-labelledby="preview-title">
       <div class="container-wide">
-        <div class="section-header">
-          <div class="section-kicker">Terminal Interface</div>
-          <h2 id="preview-title" class="section-title">An authentic institutional workspace.</h2>
-          <p class="section-subtitle">
-            Engineered with high information density, strict tabular alignment, and zero decorative distractions.
-            Switch screens using the top tabs or press function keys <span class="mono text-primary font-bold">F1</span> through <span class="mono text-primary font-bold">F6</span>.
-          </p>
-        </div>
-
-        <!-- Terminal Window Bezel -->
-        <div class="terminal-window" role="region" aria-label="Eudaimonia Terminal Interactive Simulator">
+        <div class="hero-editorial-grid">
           
-          <!-- Terminal Titlebar Chrome -->
-          <div class="terminal-titlebar">
-            <div class="titlebar-left">
-              <div class="window-dots" aria-hidden="true">
-                <span class="window-dot dot-close"></span>
-                <span class="window-dot dot-min"></span>
-                <span class="window-dot dot-max"></span>
+          <!-- Hero Left Column -->
+          <div class="hero-left-col">
+            <div class="hero-badge-strip">
+              <div class="hero-status-pill">
+                <span class="pulse-dot"></span>
+                <span>NSE / BSE CASH &amp; DERIVATIVES</span>
               </div>
-              <span class="titlebar-title">EUDAIMONIA — Terminal Native v0.1.0 [Asia/Kolkata]</span>
+              <span class="keycap">TACTILE EDITORIAL</span>
             </div>
-            <div class="titlebar-right">
-              <span class="demo-data-badge" title="Displayed figures are simulated for interface demonstration">DEMO DATA · SIMULATED FEED</span>
-              <span id="terminal-live-clock" class="titlebar-clock mono">09:45:12 IST</span>
+
+            <h1 id="hero-title" class="hero-stacked-headline" aria-label="The markets, without the noise.">
+              The markets,<br>
+              <span class="hero-headline-accent">without the noise.</span>
+            </h1>
+
+            <p class="hero-description">
+              Eudaimonia is a keyboard-first market intelligence terminal for Indian markets.
+              Explore options chains, monitor market movements, and study price action
+              through a focused, data-driven interface.
+            </p>
+
+            <div class="hero-ctas">
+              <div class="magnetic-wrap">
+                <a href="#preview" class="btn btn-primary">Explore the Terminal</a>
+              </div>
+              <div class="magnetic-wrap">
+                <a href="https://github.com/shomay12" class="btn btn-accent" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+              </div>
+            </div>
+
+            <div class="hero-quick-meta">
+              <div class="quick-meta-box">
+                <span>BENCHMARK INDICES</span>
+                <strong>NIFTY 50 · SENSEX</strong>
+              </div>
+              <div class="quick-meta-box">
+                <span>OPTIONS INTELLIGENCE</span>
+                <strong>Black-Scholes Greeks</strong>
+              </div>
+              <div class="quick-meta-box">
+                <span>MARKET DEPTH</span>
+                <strong>Level-2 5-Depth Book</strong>
+              </div>
+              <div class="quick-meta-box">
+                <span>TELEMETRY POLICY</span>
+                <strong>Zero Tracking · Local</strong>
+              </div>
             </div>
           </div>
 
-          <!-- Terminal Top Header Bar (matches eudaimonia/ui/components/header_bar.py) -->
-          <div class="terminal-header-bar">
-            <div class="header-line-1">
-              <span class="header-brand">EUDAIMONIA</span>
-              <span class="header-dev">[KJshomay12]</span>
+          <!-- Hero Right Column: Tactile Terminal Chassis & Draggable Token -->
+          <div class="hero-right-col" role="region" aria-label="Interactive Eudaimonia Terminal Console">
+            
+            <!-- Draggable Floating Instrument Token -->
+            <div class="draggable-token" title="Drag me anywhere across the screen">
+              <span class="drag-grip">⋮⋮</span>
+              <span>NIFTY 50 // 24,852.15</span>
+              <span class="keycap">+0.48%</span>
+              <span style="font-size: 0.65rem; color: #166534;">[DRAG ME]</span>
+            </div>
+
+            <!-- Terminal Chassis (Physical Industrial Console on Desk) -->
+            <div class="terminal-chassis">
               
-              <div class="ticker-item">
-                <span class="ticker-name">NIFTY:</span>
-                <span class="ticker-val val-up">24,852.15</span>
-                <span class="val-up">+118.40 (+0.48%)</span>
+              <!-- Chassis Titlebar Chrome -->
+              <div class="chassis-titlebar">
+                <div class="titlebar-left">
+                  <div class="tactile-screws" aria-hidden="true">
+                    <span class="screw-head"></span>
+                    <span class="screw-head"></span>
+                    <span class="screw-head"></span>
+                  </div>
+                  <span class="chassis-title">EUDAIMONIA HARDWARE CONSOLE // V0.1.0</span>
+                </div>
+                <div class="titlebar-left">
+                  <span class="demo-data-chip" title="Simulated numbers for interface demonstration">DEMO DATA · SIMULATED FEED</span>
+                  <span id="terminal-live-clock" class="mono text-muted-dark" style="font-size: 0.72rem;">09:45:12 IST</span>
+                </div>
               </div>
 
-              <div class="ticker-item">
-                <span class="ticker-name">BNIFTY:</span>
-                <span class="ticker-val val-up">51,920.80</span>
-                <span class="val-up">+342.10 (+0.66%)</span>
-              </div>
+              <!-- Terminal Live Indices & Feed Status Bar -->
+              <div class="chassis-header-feed">
+                <div class="feed-line-indices">
+                  <span class="feed-brand">EUDAIMONIA</span>
+                  <span class="text-muted-dark">[KJshomay12]</span>
+                  
+                  <div>
+                    <span style="color:#92989F;">NIFTY:</span>
+                    <span class="feed-val-up">24,852.15 +118.40 (+0.48%)</span>
+                  </div>
 
-              <div class="ticker-item">
-                <span class="ticker-name">SENSEX:</span>
-                <span class="ticker-val val-up">81,410.25</span>
-                <span class="val-up">+412.30 (+0.51%)</span>
-              </div>
+                  <div>
+                    <span style="color:#92989F;">BNIFTY:</span>
+                    <span class="feed-val-up">51,920.80 +342.10 (+0.66%)</span>
+                  </div>
 
-              <div class="ticker-item">
-                <span class="ticker-name">INDIA VIX:</span>
-                <span class="ticker-val val-down">12.45</span>
-                <span class="val-down">-0.32 (-2.51%)</span>
-              </div>
-            </div>
-
-            <div class="header-line-2">
-              <span>FEED: <strong class="status-tag">[MOCK]</strong></span>
-              <span>PROVIDER: <strong>mock_adapter</strong></span>
-              <span>STATE: <strong class="status-connected">CONNECTED</strong></span>
-              <span>SUBS: <strong>54</strong></span>
-              <span>LATENCY: <strong class="status-latency">1.2ms</strong></span>
-              <span class="text-muted">QUALITY: OK (0 gaps)</span>
-            </div>
-          </div>
-
-          <!-- Terminal Navigation Bar (F-Keys screen switcher) -->
-          <div class="terminal-nav-bar" role="tablist" aria-label="Terminal Screen Tabs">
-            <button type="button" class="screen-tab active" data-screen="chain" role="tab" aria-selected="true" aria-controls="screen-chain">
-              <span class="tab-key">F3</span> Options Chain
-            </button>
-            <button type="button" class="screen-tab" data-screen="chart" role="tab" aria-selected="false" aria-controls="screen-chart">
-              <span class="tab-key">F5</span> Candlestick Chart
-            </button>
-            <button type="button" class="screen-tab" data-screen="depth" role="tab" aria-selected="false" aria-controls="screen-depth">
-              <span class="tab-key">F4</span> Quote &amp; 5-Depth
-            </button>
-            <button type="button" class="screen-tab" data-screen="overview" role="tab" aria-selected="false" aria-controls="screen-overview">
-              <span class="tab-key">F2</span> Market Overview
-            </button>
-            <button type="button" class="screen-tab" data-screen="help" role="tab" aria-selected="false" aria-controls="screen-help">
-              <span class="tab-key">F1</span> Help &amp; Manual
-            </button>
-            <button type="button" class="screen-tab" data-screen="cmd" role="tab" aria-selected="false" aria-label="Open Command Prompt">
-              <span class="tab-key">:</span> Cmd
-            </button>
-          </div>
-
-          <!-- Terminal Viewport Area -->
-          <div class="terminal-screen-viewport">
-
-            <!-- SCREEN 1: OPTIONS CHAIN (F3) -->
-            <div id="screen-chain" class="terminal-screen active" role="tabpanel">
-              <!-- Chain Summary Bar -->
-              <div class="chain-summary-bar">
-                <div class="chain-target-group">
-                  <span id="chain-underlying-name" class="chain-target-name">NIFTY 50</span>
-                  <span>Spot: <strong id="chain-spot-price" class="chain-target-spot">24,852.15</strong></span>
-                  <div class="chain-expiry-selector">
-                    <span>Expiry: <strong id="chain-active-expiry">31-OCT-2026 (Weekly)</strong></span>
-                    <button type="button" id="btn-prev-expiry" class="chart-interval-btn" aria-label="Previous expiry">[</button>
-                    <button type="button" id="btn-next-expiry" class="chart-interval-btn" aria-label="Next expiry">]</button>
+                  <div>
+                    <span style="color:#92989F;">SENSEX:</span>
+                    <span class="feed-val-up">81,410.25 +412.30 (+0.51%)</span>
                   </div>
                 </div>
 
-                <div class="chain-metrics-group">
-                  <div class="chain-metric">ATM Strike: <strong id="metric-atm-strike">24,850</strong></div>
-                  <div class="chain-metric">PCR (OI): <strong id="metric-pcr-oi">1.18</strong></div>
-                  <div class="chain-metric">PCR (Vol): <strong id="metric-pcr-vol">0.94</strong></div>
-                  <div class="chain-metric">Max Pain: <strong id="metric-max-pain">24,800</strong></div>
+                <div class="feed-line-meta">
+                  <span>FEED: <strong style="color:#FBBF24;">[MOCK]</strong></span>
+                  <span>PROVIDER: <strong>mock_adapter</strong></span>
+                  <span>STATE: <strong style="color:#86EFAC;">CONNECTED</strong></span>
+                  <span>SUBS: <strong>54</strong></span>
+                  <span>LATENCY: <strong style="color:#86EFAC;">1.2ms</strong></span>
                 </div>
               </div>
 
-              <!-- Options Table -->
-              <div class="terminal-table-container">
-                <table class="chain-table" aria-label="NIFTY Options Chain Table">
-                  <thead>
-                    <tr>
-                      <th scope="col" colspan="8" style="text-align: center; background-color: #171B1F; border-right: 1px solid #252A2F;">CALL OPTIONS (CE)</th>
-                      <th scope="col" class="col-strike" style="background-color: #1E2328;">STRIKE</th>
-                      <th scope="col" colspan="8" style="text-align: center; background-color: #171B1F; border-left: 1px solid #252A2F;">PUT OPTIONS (PE)</th>
-                    </tr>
-                    <tr>
-                      <th scope="col">OI</th>
-                      <th scope="col">CHG OI</th>
-                      <th scope="col">VOLUME</th>
-                      <th scope="col">IV</th>
-                      <th scope="col">DELTA</th>
-                      <th scope="col">BID</th>
-                      <th scope="col">ASK</th>
-                      <th scope="col" style="border-right: 1px solid #252A2F;">LTP</th>
-                      <th scope="col" class="col-strike">STRIKE</th>
-                      <th scope="col" style="border-left: 1px solid #252A2F;">LTP</th>
-                      <th scope="col">BID</th>
-                      <th scope="col">ASK</th>
-                      <th scope="col">DELTA</th>
-                      <th scope="col">IV</th>
-                      <th scope="col">VOLUME</th>
-                      <th scope="col">CHG OI</th>
-                      <th scope="col">OI</th>
-                    </tr>
-                  </thead>
-                  <tbody id="chain-table-body">
-                    <!-- Populated dynamically via terminal-engine.js -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- SCREEN 2: CANDLESTICK CHART (F5) -->
-            <div id="screen-chart" class="terminal-screen" role="tabpanel">
-              <div class="chart-controls-bar">
-                <div class="chart-symbol-info">
-                  <span class="font-bold text-primary">NSE:NIFTY</span>
-                  <span class="text-muted">| 5-Min Intraday Candlestick Chart</span>
-                  <span class="text-secondary">VWAP: <strong class="text-primary font-mono">24,841.30</strong></span>
-                </div>
-                <div class="chart-intervals" role="group" aria-label="Chart Interval Selectors">
-                  <span class="text-muted" style="font-size: 0.75rem; margin-right: 0.35rem;">Intervals:</span>
-                  <button type="button" class="chart-interval-btn" data-interval="1m">1m</button>
-                  <button type="button" class="chart-interval-btn" data-interval="3m">3m</button>
-                  <button type="button" class="chart-interval-btn active" data-interval="5m">5m</button>
-                  <button type="button" class="chart-interval-btn" data-interval="15m">15m</button>
-                  <button type="button" class="chart-interval-btn" data-interval="1d">1d</button>
-                </div>
+              <!-- Terminal Keycap Screen Tabs -->
+              <div class="chassis-nav-tabs" role="tablist" aria-label="Terminal Screen Views">
+                <button type="button" class="screen-tab active" data-screen="chain" role="tab" aria-selected="true" aria-controls="screen-chain">
+                  <span class="tab-fkey">F3</span> Options Chain
+                </button>
+                <button type="button" class="screen-tab" data-screen="chart" role="tab" aria-selected="false" aria-controls="screen-chart">
+                  <span class="tab-fkey">F5</span> Candlestick Chart
+                </button>
+                <button type="button" class="screen-tab" data-screen="depth" role="tab" aria-selected="false" aria-controls="screen-depth">
+                  <span class="tab-fkey">F4</span> Quote &amp; 5-Depth
+                </button>
+                <button type="button" class="screen-tab" data-screen="overview" role="tab" aria-selected="false" aria-controls="screen-overview">
+                  <span class="tab-fkey">F2</span> Market Overview
+                </button>
+                <button type="button" class="screen-tab" data-screen="help" role="tab" aria-selected="false" aria-controls="screen-help">
+                  <span class="tab-fkey">F1</span> Help Manual
+                </button>
+                <button type="button" class="screen-tab" data-screen="cmd" role="tab" aria-selected="false" aria-label="Open Command Prompt">
+                  <span class="tab-fkey">:</span> Cmd
+                </button>
               </div>
 
-              <div id="chart-canvas-box" class="chart-canvas-container">
-                <div id="chart-crosshair-hud" class="chart-crosshair-hud">
-                  Hover across bars to inspect OHLCV data
-                </div>
-              </div>
-            </div>
+              <!-- Screen Viewports -->
+              <div class="chassis-screen-viewport">
 
-            <!-- SCREEN 3: DEPTH & QUOTE (F4) -->
-            <div id="screen-depth" class="terminal-screen" role="tabpanel">
-              <div class="quote-summary-panel">
-                <div class="quote-metric-item">
-                  <span class="quote-label">SYMBOL / EXCHANGE</span>
-                  <span class="quote-value">NSE:RELIANCE</span>
-                </div>
-                <div class="quote-metric-item">
-                  <span class="quote-label">LAST TRADED PRICE</span>
-                  <span class="quote-value val-up">3,042.50 <span style="font-size: 0.75rem;">+22.10 (+0.73%)</span></span>
-                </div>
-                <div class="quote-metric-item">
-                  <span class="quote-label">DAY RANGE (LOW / HIGH)</span>
-                  <span class="quote-value">3,018.00 — 3,055.40</span>
-                </div>
-                <div class="quote-metric-item">
-                  <span class="quote-label">TOTAL VOLUME</span>
-                  <span class="quote-value">4,819,250</span>
-                </div>
-              </div>
+                <!-- SCREEN 1: OPTIONS CHAIN (F3) -->
+                <div id="screen-chain" class="terminal-screen active" role="tabpanel">
+                  <div class="chain-summary-panel">
+                    <div style="display:flex; align-items:center; gap:0.75rem;">
+                      <span id="chain-underlying-name" class="font-bold text-on-dark">NIFTY 50</span>
+                      <span>Spot: <strong id="chain-spot-price" class="feed-val-up">24,852.15</strong></span>
+                      <div style="display:flex; align-items:center; gap:0.35rem; color:#92989F;">
+                        <span>Expiry: <strong id="chain-active-expiry" style="color:#FFF;">31-OCT-2026 (Weekly)</strong></span>
+                        <button type="button" id="btn-prev-expiry" class="chart-interval-btn" aria-label="Previous expiry">[</button>
+                        <button type="button" id="btn-next-expiry" class="chart-interval-btn" aria-label="Next expiry">]</button>
+                      </div>
+                    </div>
 
-              <div class="depth-grid">
-                <!-- Bids Table -->
-                <div class="terminal-table-container">
-                  <table class="depth-table" aria-label="Level-2 Bid Orders">
-                    <thead>
-                      <tr>
-                        <th scope="col">ORDERS</th>
-                        <th scope="col">QTY</th>
-                        <th scope="col" style="text-align: right;">BID (BUY)</th>
-                      </tr>
-                    </thead>
-                    <tbody id="bids-table-body">
-                      <!-- Populated dynamically -->
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <td colspan="2" class="font-bold">Total Bid Qty:</td>
-                        <td id="depth-total-bids" class="font-bold depth-bid-price" style="text-align: right;">--</td>
-                      </tr>
-                    </tfoot>
-                  </table>
+                    <div class="chain-metrics-row">
+                      <div class="chain-metric">ATM Strike: <strong id="metric-atm-strike">24,850</strong></div>
+                      <div class="chain-metric">PCR (OI): <strong id="metric-pcr-oi">1.18</strong></div>
+                      <div class="chain-metric">PCR (Vol): <strong id="metric-pcr-vol">0.94</strong></div>
+                      <div class="chain-metric">Max Pain: <strong id="metric-max-pain">24,800</strong></div>
+                    </div>
+                  </div>
+
+                  <div class="terminal-table-box">
+                    <table class="chain-table" aria-label="Options Chain Data Table">
+                      <thead>
+                        <tr>
+                          <th scope="col" colspan="8" style="text-align: center; background-color: #171A1F; border-right: 1.5px solid #282E36;">CALLS (CE)</th>
+                          <th scope="col" class="col-strike">STRIKE</th>
+                          <th scope="col" colspan="8" style="text-align: center; background-color: #171A1F; border-left: 1.5px solid #282E36;">PUTS (PE)</th>
+                        </tr>
+                        <tr>
+                          <th scope="col">OI</th>
+                          <th scope="col">CHG OI</th>
+                          <th scope="col">VOL</th>
+                          <th scope="col">IV</th>
+                          <th scope="col">DELTA</th>
+                          <th scope="col">BID</th>
+                          <th scope="col">ASK</th>
+                          <th scope="col" style="border-right: 1.5px solid #282E36;">LTP</th>
+                          <th scope="col" class="col-strike">STRIKE</th>
+                          <th scope="col" style="border-left: 1.5px solid #282E36;">LTP</th>
+                          <th scope="col">BID</th>
+                          <th scope="col">ASK</th>
+                          <th scope="col">DELTA</th>
+                          <th scope="col">IV</th>
+                          <th scope="col">VOL</th>
+                          <th scope="col">CHG OI</th>
+                          <th scope="col">OI</th>
+                        </tr>
+                      </thead>
+                      <tbody id="chain-table-body">
+                        <!-- Populated dynamically via terminal-engine.js -->
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
 
-                <!-- Asks Table -->
-                <div class="terminal-table-container">
-                  <table class="depth-table" aria-label="Level-2 Ask Orders">
-                    <thead>
-                      <tr>
-                        <th scope="col">ASK (SELL)</th>
-                        <th scope="col">QTY</th>
-                        <th scope="col" style="text-align: right;">ORDERS</th>
-                      </tr>
-                    </thead>
-                    <tbody id="asks-table-body">
-                      <!-- Populated dynamically -->
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <td id="depth-total-asks" class="font-bold depth-ask-price">--</td>
-                        <td colspan="2" class="font-bold" style="text-align: right;">Total Ask Qty</td>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-              </div>
-            </div>
+                <!-- SCREEN 2: CANDLESTICK CHART (F5) -->
+                <div id="screen-chart" class="terminal-screen" role="tabpanel">
+                  <div class="chart-controls-panel">
+                    <div>
+                      <span class="font-bold">NSE:NIFTY</span>
+                      <span class="text-muted-dark">| 5-Min Aggregated Candlestick Chart</span>
+                      <span style="margin-left: 0.75rem;">VWAP: <strong class="text-on-dark font-mono">24,841.30</strong></span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:0.25rem;">
+                      <span style="font-size:0.72rem; color:#92989F;">Interval:</span>
+                      <button type="button" class="chart-interval-btn" data-interval="1m">1m</button>
+                      <button type="button" class="chart-interval-btn" data-interval="3m">3m</button>
+                      <button type="button" class="chart-interval-btn active" data-interval="5m">5m</button>
+                      <button type="button" class="chart-interval-btn" data-interval="15m">15m</button>
+                      <button type="button" class="chart-interval-btn" data-interval="1d">1d</button>
+                    </div>
+                  </div>
 
-            <!-- SCREEN 4: MARKET OVERVIEW (F2) -->
-            <div id="screen-overview" class="terminal-screen" role="tabpanel">
-              <div id="overview-indices-grid" class="overview-grid">
-                <!-- Populated dynamically -->
-              </div>
-              <div class="transparency-notice-box" style="margin-top: 1rem;">
-                <p><strong>Watchlist Monitoring:</strong> Tracking active Indian equities and derivatives across NSE Cash, NSE F&amp;O, and BSE. Press <span class="mono text-primary font-bold">:</span> to issue commands such as <code class="mono">watch NSE:INFY</code> or <code class="mono">chain BANKNIFTY</code>.</p>
-              </div>
-            </div>
-
-            <!-- SCREEN 5: HELP SCREEN (F1) -->
-            <div id="screen-help" class="terminal-screen" role="tabpanel">
-              <div class="code-block-wrapper">
-                <div class="code-block-header">
-                  <span>EUDAIMONIA REFERENCE MANUAL &amp; KEYBINDINGS</span>
+                  <div id="chart-canvas-box" class="chart-svg-box">
+                    <div id="chart-crosshair-hud" class="chart-hud-pill">
+                      Hover across candles to inspect OHLCV data
+                    </div>
+                  </div>
                 </div>
-                <div class="code-content" style="white-space: pre-wrap; font-size: 0.8rem;">
-EUDAIMONIA - QUAXIOM TRADE TERMINAL
+
+                <!-- SCREEN 3: QUOTE & 5-DEPTH (F4) -->
+                <div id="screen-depth" class="terminal-screen" role="tabpanel">
+                  <div class="quote-summary-grid">
+                    <div class="quote-metric-item">
+                      <span class="quote-label">SYMBOL / EXCHANGE</span>
+                      <span class="quote-val">NSE:RELIANCE</span>
+                    </div>
+                    <div class="quote-metric-item">
+                      <span class="quote-label">LAST TRADED PRICE</span>
+                      <span class="quote-val feed-val-up">3,042.50 <span style="font-size:0.72rem;">+22.10 (+0.73%)</span></span>
+                    </div>
+                    <div class="quote-metric-item">
+                      <span class="quote-label">DAY LOW / HIGH</span>
+                      <span class="quote-val">3,018.00 — 3,055.40</span>
+                    </div>
+                    <div class="quote-metric-item">
+                      <span class="quote-label">TOTAL VOLUME</span>
+                      <span class="quote-val">4,819,250</span>
+                    </div>
+                  </div>
+
+                  <div class="depth-split-grid">
+                    <div class="terminal-table-box">
+                      <table class="depth-table" aria-label="Level-2 Bid Orders">
+                        <thead>
+                          <tr>
+                            <th scope="col">ORDERS</th>
+                            <th scope="col">QTY</th>
+                            <th scope="col" style="text-align: right;">BID (BUY)</th>
+                          </tr>
+                        </thead>
+                        <tbody id="bids-table-body">
+                          <!-- Populated dynamically -->
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <td colspan="2" class="font-bold">Total Bid Qty:</td>
+                            <td id="depth-total-bids" class="font-bold depth-bid" style="text-align: right;">--</td>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+
+                    <div class="terminal-table-box">
+                      <table class="depth-table" aria-label="Level-2 Ask Orders">
+                        <thead>
+                          <tr>
+                            <th scope="col">ASK (SELL)</th>
+                            <th scope="col">QTY</th>
+                            <th scope="col" style="text-align: right;">ORDERS</th>
+                          </tr>
+                        </thead>
+                        <tbody id="asks-table-body">
+                          <!-- Populated dynamically -->
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <td id="depth-total-asks" class="font-bold depth-ask">--</td>
+                            <td colspan="2" class="font-bold" style="text-align: right;">Total Ask Qty</td>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SCREEN 4: MARKET OVERVIEW (F2) -->
+                <div id="screen-overview" class="terminal-screen" role="tabpanel">
+                  <div id="overview-indices-grid" class="overview-indices-row">
+                    <!-- Populated dynamically -->
+                  </div>
+                  <div class="quick-meta-box" style="background:#14171A; border-color:#282E36; color:#92989F;">
+                    <p>Tracking active Indian indices &amp; equities across NSE Cash and BSE. Press <span class="tab-fkey font-bold">:</span> to issue commands such as <code class="mono" style="color:#86EFAC;">chain BANKNIFTY</code> or <code class="mono" style="color:#86EFAC;">watch NSE:INFY</code>.</p>
+                  </div>
+                </div>
+
+                <!-- SCREEN 5: HELP SCREEN (F1) -->
+                <div id="screen-help" class="terminal-screen" role="tabpanel">
+                  <div class="code-console-panel" style="box-shadow:none; border:none;">
+                    <div class="code-terminal-pre" style="padding:1rem;">
+EUDAIMONIA // TERMINAL NATIVE REFERENCE MANUAL
 Developer: KJshomay12 | Version: 0.1.0
 Target Markets: National Stock Exchange (NSE) &amp; Bombay Stock Exchange (BSE)
 
-1. GLOBAL KEYBOARD NAVIGATION
+1. GLOBAL NAVIGATION SHORTCUTS
   F1        Display this Help and Reference Screen
-  F2        Market Overview Screen (Indices benchmarks and watchlist quotes)
-  F3        Options Chain Screen (Calls/Puts, Greeks, PCR, Max Pain)
+  F2        Market Overview (Indices benchmarks &amp; watchlist quotes)
+  F3        Options Chain (Calls/Puts, Greeks, PCR, Max Pain)
   F4        Detailed Quote &amp; Level-2 5-Depth Order Book
   F5        Candlestick Chart (OHLC, Volume, VWAP, Crosshair)
   F6        Watchlists Management Screen
-  : or /    Open interactive command line bar
+  : or /    Open Vim-style interactive command line bar
   ESC       Close command bar or return to previous screen
-  q         Quit Eudaimonia application
+  q         Quit application
 
 2. OPTIONS CHAIN SHORTCUTS
-  [ and ]   Cycle through available weekly and monthly expiry dates
+  [ and ]   Cycle through weekly and monthly expiry dates
   - and +   Shrink or expand visible strike range around ATM
   ↑ and ↓   Scroll through strike ladder
 
@@ -407,36 +425,38 @@ Target Markets: National Stock Exchange (NSE) &amp; Bombay Stock Exchange (BSE)
   1, 3, 5   Switch interval to 1-minute, 3-minute, or 5-minute candles
   f, d      Switch interval to 15-minute (f) or Daily (d) candles
   v         Toggle Volume Weighted Average Price (VWAP) overlay
-  ← and →   Move crosshair cursor across historical bars to inspect OHLCV
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Terminal Command Line Component (Prompt activated with ':') -->
+              <div class="terminal-command-bar" aria-label="Terminal Command Prompt">
+                <div class="cmd-input-wrap">
+                  <span class="cmd-prompt-glyph">:</span>
+                  <input type="text" id="cmd-input-field" class="terminal-input-element" placeholder="Enter command (e.g. 'chain BANKNIFTY', 'chart 15m', 'help', 'overview')..." autocomplete="off" spellcheck="false">
+                </div>
+                <div id="cmd-feedback-text" class="cmd-hint-line">
+                  Type 'help' for command manual. Press ESC to cancel.
                 </div>
               </div>
-            </div>
 
-          </div>
+              <!-- Terminal Status Footer Bar -->
+              <div class="chassis-footer">
+                <div class="footer-key-list">
+                  <span><strong class="tab-fkey">F1</strong> Help</span>
+                  <span><strong class="tab-fkey">F2</strong> Overview</span>
+                  <span><strong class="tab-fkey">F3</strong> Chain</span>
+                  <span><strong class="tab-fkey">F4</strong> Depth</span>
+                  <span><strong class="tab-fkey">F5</strong> Chart</span>
+                  <span><strong class="tab-fkey">:</strong> Cmd</span>
+                </div>
+                <div>
+                  <span>Target: <strong id="footer-active-target" style="color:#86EFAC;">NIFTY</strong></span>
+                </div>
+              </div>
 
-          <!-- Terminal Command Line Component (Prompt activated with ':') -->
-          <div class="terminal-cmd-bar" aria-label="Terminal Command Prompt">
-            <div class="cmd-input-row">
-              <span class="cmd-prompt-symbol">:</span>
-              <input type="text" id="cmd-input-field" class="cmd-input-field" placeholder="Enter command (e.g. 'chain BANKNIFTY', 'chart 15m', 'help', 'overview')..." autocomplete="off" spellcheck="false">
-            </div>
-            <div id="cmd-feedback-text" class="cmd-feedback-line">
-              Type 'help' to see available commands. Press ESC to close.
-            </div>
-          </div>
-
-          <!-- Terminal Status Footer Bar -->
-          <div class="terminal-status-footer">
-            <div class="footer-shortcuts">
-              <span class="shortcut-item"><strong>F1</strong> Help</span>
-              <span class="shortcut-item"><strong>F2</strong> Overview</span>
-              <span class="shortcut-item"><strong>F3</strong> Chain</span>
-              <span class="shortcut-item"><strong>F4</strong> Depth</span>
-              <span class="shortcut-item"><strong>F5</strong> Chart</span>
-              <span class="shortcut-item"><strong>:</strong> Cmd</span>
-            </div>
-            <div>
-              <span>Target: <strong id="footer-active-target" class="footer-context">NIFTY</strong></span>
             </div>
           </div>
 
@@ -445,57 +465,44 @@ Target Markets: National Stock Exchange (NSE) &amp; Bombay Stock Exchange (BSE)
     </section>
 
     <!-- ====================================================================
-         Product Philosophy Section
+         Product Philosophy Section (Editorial Restraint & Typography)
          ==================================================================== -->
     <section class="philosophy-section" aria-labelledby="philosophy-title">
       <div class="container">
-        <div class="philosophy-layout">
-          <div class="philosophy-headline-col">
-            <div class="section-kicker">Design Discipline</div>
-            <h2 id="philosophy-title" class="philosophy-headline">Clarity is a competitive advantage.</h2>
-          </div>
-
-          <div class="philosophy-body-col">
-            <p class="philosophy-lead">
+        <div class="philosophy-editorial-layout">
+          <div>
+            <span class="section-label-chip">01 // DESIGN DISCIPLINE</span>
+            <h2 id="philosophy-title" class="philosophy-display-quote">Clarity is a competitive advantage.</h2>
+            <p class="philosophy-body-text">
               Markets produce more information than most interfaces can communicate effectively.
               Eudaimonia is designed around a different principle: show the information that matters,
               keep the interface out of the way, and let the user remain in control.
             </p>
+          </div>
 
-            <div class="philosophy-essay">
-              <p>
-                Modern financial applications too often prioritize decorative visuals over functional speed.
-                Layers of nested cards, non-standard rounding, and slow web wrappers conceal the fundamental
-                price mechanics professional market participants need.
-              </p>
-              <p>
-                Eudaimonia is built strictly as a high-density, keyboard-first terminal.
-                Every pixel serves data comprehension: clean tabular monospace alignment,
-                instantaneous timeframe switching, deterministic option valuation, and transparent feed status.
+          <div class="philosophy-tactile-notes">
+            <div class="tactile-note-card">
+              <span class="note-num">01 / DENSITY WITHOUT CHAOS</span>
+              <h3 class="note-title">Monospace Tabular Alignment</h3>
+              <p class="note-desc">
+                Numbers must never jump across columns. Tabular figures and fixed-pitch metrics allow the human eye to instantly scan volume anomalies and strike skews.
               </p>
             </div>
 
-            <div class="philosophy-pillars">
-              <div class="pillar-item">
-                <h3 class="pillar-title">Density Without Visual Noise</h3>
-                <p class="pillar-desc">
-                  Strict monospace alignment and purposeful contrast maximize readable information per screen without fatigue.
-                </p>
-              </div>
+            <div class="tactile-note-card">
+              <span class="note-num">02 / LOCAL VALUATION</span>
+              <h3 class="note-title">Deterministic SciPy Computation</h3>
+              <p class="note-desc">
+                Black-Scholes Greeks, Put-Call Ratios, and Max Pain calculations evaluate locally on your machine with zero cloud server hops or artificial delays.
+              </p>
+            </div>
 
-              <div class="pillar-item">
-                <h3 class="pillar-title">Deterministic Local Computation</h3>
-                <p class="pillar-desc">
-                  Black-Scholes Greeks, Put-Call Ratios, and Max Pain calculations execute locally in Python/SciPy with zero cloud telemetry.
-                </p>
-              </div>
-
-              <div class="pillar-item">
-                <h3 class="pillar-title">Direct Keyboard Navigation</h3>
-                <p class="pillar-desc">
-                  Eliminates mouse latency. Navigate options expiries, strike windows, and chart intervals with direct single-key shortcuts.
-                </p>
-              </div>
+            <div class="tactile-note-card">
+              <span class="note-num">03 / ZERO MOUSE DEPENDENCY</span>
+              <h3 class="note-title">Keyboard-First Muscle Memory</h3>
+              <p class="note-desc">
+                Cycle weekly expiries with <span class="keycap">[</span> and <span class="keycap">]</span>, zoom strike windows with <span class="keycap">-</span> and <span class="keycap">+</span>, and change timeframes in a single keystroke.
+              </p>
             </div>
           </div>
         </div>
@@ -503,114 +510,129 @@ Target Markets: National Stock Exchange (NSE) &amp; Bombay Stock Exchange (BSE)
     </section>
 
     <!-- ====================================================================
-         Core Capabilities Section
+         Core Capabilities: Asymmetric Editorial Composition
          ==================================================================== -->
     <section id="capabilities" class="capabilities-section" aria-labelledby="capabilities-title">
       <div class="container">
-        <div class="section-header">
-          <div class="section-kicker">Core Capabilities</div>
-          <h2 id="capabilities-title" class="section-title">Engineered for Indian market derivatives.</h2>
-          <p class="section-subtitle">
-            A focused terminal environment providing deep options chain intelligence, real-time tick parsing, and technical charting.
+        <div class="section-head-editorial">
+          <div>
+            <span class="section-label-chip">02 // CAPABILITIES</span>
+            <h2 id="capabilities-title" class="editorial-title">Engineered for Indian market derivatives.</h2>
+          </div>
+          <p class="editorial-subtitle">
+            An uncompromising terminal environment providing deep options chain intelligence, tick parsing, and technical charting.
           </p>
         </div>
 
-        <div class="capabilities-grid">
-          <!-- Capability 1 -->
-          <div class="capability-block">
-            <span class="capability-index">01 // DERIVATIVES</span>
-            <h3 class="capability-title">Options Intelligence</h3>
-            <p class="capability-body">
-              Explore Indian index and stock options through a structured options chain, including strike prices,
-              bid and ask, volume, open interest, implied volatility, and analytical Greeks where supported.
-            </p>
-            <div class="capability-details">
-              <span class="capability-tag">Black-Scholes Greeks</span>
-              <span class="capability-tag">Put-Call Ratio (PCR)</span>
-              <span class="capability-tag">Max Pain Strike</span>
-              <span class="capability-tag">Intraday OI Buildup</span>
+        <div class="capabilities-editorial-grid">
+          
+          <!-- Feature Block 1: Options Intelligence with Live Greek Simulator -->
+          <div class="feat-hero-block">
+            <div>
+              <span class="feat-index">01 // OPTIONS INTELLIGENCE</span>
+              <h3 class="feat-title">Options Intelligence</h3>
+              <p class="feat-desc">
+                Explore Indian index and stock options through a structured options chain, including strike prices,
+                bid and ask, volume, open interest, implied volatility, and analytical Greeks where supported.
+              </p>
+              <div class="feat-tag-row">
+                <span class="feat-tag">Black-Scholes Greeks</span>
+                <span class="feat-tag">Put-Call Ratio (PCR)</span>
+                <span class="feat-tag">Max Pain Strike</span>
+                <span class="feat-tag">Intraday OI Shifts</span>
+              </div>
+            </div>
+
+            <!-- Tactile Greek Sensitivity Interactive Scrubber -->
+            <div class="greek-simulator-box">
+              <div class="greek-slider-header">
+                <span>INTERACTIVE GREEK SENSITIVITY (ATM 24850)</span>
+                <span>IV: <strong id="greek-iv-val" class="mono text-ink">13.5%</strong></span>
+              </div>
+              <input type="range" id="greek-iv-slider" min="8" max="35" value="14" step="0.5" style="width:100%; accent-color:var(--text-ink); margin-bottom:0.75rem; cursor:pointer;" aria-label="Implied Volatility sensitivity slider">
+              <div class="greek-display-row">
+                <div class="greek-chip">
+                  <span class="greek-chip-label">DELTA (Δ)</span>
+                  <span id="sim-greek-delta" class="greek-chip-val">0.53</span>
+                </div>
+                <div class="greek-chip">
+                  <span class="greek-chip-label">GAMMA (Γ)</span>
+                  <span id="sim-greek-gamma" class="greek-chip-val">0.082</span>
+                </div>
+                <div class="greek-chip">
+                  <span class="greek-chip-label">THETA (Θ)</span>
+                  <span id="sim-greek-theta" class="greek-chip-val">-18.40</span>
+                </div>
+                <div class="greek-chip">
+                  <span class="greek-chip-label">VEGA (ν)</span>
+                  <span id="sim-greek-vega" class="greek-chip-val">12.15</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Capability 2 -->
-          <div class="capability-block">
-            <span class="capability-index">02 // MONITORING</span>
-            <h3 class="capability-title">Market Monitoring</h3>
-            <p class="capability-body">
+          <!-- Feature Block 2: Price Action & Candlesticks -->
+          <div class="feat-side-block">
+            <div>
+              <span class="feat-index">02 // TECHNICALS</span>
+              <h3 class="feat-title">Price Action &amp; Charts</h3>
+              <p class="feat-desc">
+                Inspect candlestick charts across supported intervals, with volume and other relevant market indicators.
+                Real-time tick-to-candle aggregation engine with Volume-Weighted Average Price (VWAP) overlays.
+              </p>
+            </div>
+            <div class="feat-tag-row">
+              <span class="feat-tag">1m / 3m / 5m / 15m / 1d</span>
+              <span class="feat-tag">Intraday VWAP</span>
+              <span class="feat-tag">Volume Profile</span>
+            </div>
+          </div>
+
+          <!-- Feature Block 3: Market Monitoring -->
+          <div class="feat-row-3">
+            <span class="feat-index">03 // MONITORING</span>
+            <h3 class="feat-title">Market Monitoring</h3>
+            <p class="feat-desc">
               Follow relevant indices, securities, and derivatives through a focused market watchlist.
-              Track tick-by-tick changes, day highs and lows, 52-week references, and volume velocity across NSE and BSE.
+              Track tick changes, day highs and lows, 52-week references, and volume velocity across NSE and BSE.
             </p>
-            <div class="capability-details">
-              <span class="capability-tag">NSE NIFTY 50</span>
-              <span class="capability-tag">NIFTY BANK</span>
-              <span class="capability-tag">BSE SENSEX</span>
-              <span class="capability-tag">Custom Equities</span>
+            <div class="feat-tag-row">
+              <span class="feat-tag">NIFTY 50</span>
+              <span class="feat-tag">BANKNIFTY</span>
+              <span class="feat-tag">SENSEX</span>
             </div>
           </div>
 
-          <!-- Capability 3 -->
-          <div class="capability-block">
-            <span class="capability-index">03 // TECHNICALS</span>
-            <h3 class="capability-title">Price Action &amp; Charts</h3>
-            <p class="capability-body">
-              Inspect candlestick charts across supported intervals, with volume and other relevant market indicators.
-              Intraday tick-to-candle aggregation engine with Volume-Weighted Average Price (VWAP) overlays and crosshairs.
-            </p>
-            <div class="capability-details">
-              <span class="capability-tag">1m / 3m / 5m / 15m / 1d</span>
-              <span class="capability-tag">VWAP Overlay</span>
-              <span class="capability-tag">Volume Profile</span>
-              <span class="capability-tag">Keyboard Crosshair</span>
-            </div>
-          </div>
-
-          <!-- Capability 4 -->
-          <div class="capability-block">
-            <span class="capability-index">04 // ERGONOMICS</span>
-            <h3 class="capability-title">Keyboard-First Workflow</h3>
-            <p class="capability-body">
+          <!-- Feature Block 4: Keyboard-First Workflow -->
+          <div class="feat-row-4">
+            <span class="feat-index">04 // ERGONOMICS</span>
+            <h3 class="feat-title">Keyboard-First Workflow</h3>
+            <p class="feat-desc">
               Navigate the interface efficiently using keyboard shortcuts, searchable instruments, and minimal interaction overhead.
-              Vim-style command bar allows rapid execution of navigation, expiry switches, and quote queries.
+              Vim-style command palette triggers instant navigation.
             </p>
-            <div class="capability-details">
-              <span class="capability-tag">F1–F6 Function Keys</span>
-              <span class="capability-tag">Vim ':' Command Bar</span>
-              <span class="capability-tag">Expiry Cycling '[' / ']'</span>
-              <span class="capability-tag">Strike Zoom '-' / '+'</span>
+            <div class="feat-tag-row">
+              <span class="feat-tag">F1–F6 Keycaps</span>
+              <span class="feat-tag">Vim &lsquo;:&rsquo; Prompt</span>
+              <span class="feat-tag">Expiry Cycling</span>
             </div>
           </div>
 
-          <!-- Capability 5 -->
-          <div class="capability-block">
-            <span class="capability-index">05 // ANALYTICS</span>
-            <h3 class="capability-title">Market Analytics</h3>
-            <p class="capability-body">
+          <!-- Feature Block 5: Market Analytics -->
+          <div class="feat-row-5">
+            <span class="feat-index">05 // ANALYTICS</span>
+            <h3 class="feat-title">Market Analytics</h3>
+            <p class="feat-desc">
               Study open-interest changes, put-call ratios, volatility, and related indicators when the required data is available.
-              Detect long buildup, short buildup, long unwinding, and short covering directly on the strike ladder.
+              Detect long buildup, short buildup, and covering.
             </p>
-            <div class="capability-details">
-              <span class="capability-tag">OI Net Shift</span>
-              <span class="capability-tag">IV Skew Estimation</span>
-              <span class="capability-tag">Volume PCR vs OI PCR</span>
-              <span class="capability-tag">Expiry Ladder</span>
+            <div class="feat-tag-row">
+              <span class="feat-tag">OI Buildup Analysis</span>
+              <span class="feat-tag">Volume PCR</span>
+              <span class="feat-tag">Max Pain</span>
             </div>
           </div>
 
-          <!-- Capability 6 -->
-          <div class="capability-block">
-            <span class="capability-index">06 // INTEGRITY</span>
-            <h3 class="capability-title">Transparent Data</h3>
-            <p class="capability-body">
-              Make the source, timestamp, and status of market data visible.
-              Clearly distinguish live, delayed, historical, and simulated data with automated sequence gap detection and staleness monitors.
-            </p>
-            <div class="capability-details">
-              <span class="capability-tag">Staleness Monitor</span>
-              <span class="capability-tag">Sequence Validation</span>
-              <span class="capability-tag">Feed Latency Gauge</span>
-              <span class="capability-tag">Explicit Data Modes</span>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -620,54 +642,56 @@ Target Markets: National Stock Exchange (NSE) &amp; Bombay Stock Exchange (BSE)
          ==================================================================== -->
     <section id="transparency" class="transparency-section" aria-labelledby="transparency-title">
       <div class="container">
-        <div class="section-header">
-          <div class="section-kicker">Data Integrity</div>
-          <h2 id="transparency-title" class="section-title">Know what you’re looking at.</h2>
-          <p class="section-subtitle">
-            Market integrity begins with absolute clarity about your data source.
+        <div class="section-head-editorial">
+          <div>
+            <span class="section-label-chip">03 // TRANSPARENCY</span>
+            <h2 id="transparency-title" class="editorial-title">Know what you’re looking at.</h2>
+          </div>
+          <p class="editorial-subtitle">
+            Market integrity begins with absolute clarity about your data feed.
             Eudaimonia enforces strict architectural boundaries across four distinct data modes.
           </p>
         </div>
 
-        <div class="transparency-grid">
-          <div class="data-mode-card">
-            <span class="mode-badge mode-live">LIVE FEED</span>
-            <h3 class="mode-title">Broker WebSocket Feed</h3>
-            <p class="mode-desc">
+        <div class="transparency-cards-row">
+          <div class="mode-paper-card">
+            <span class="mode-badge-pill badge-live">LIVE FEED</span>
+            <h3 class="note-title">Broker WebSocket Feed</h3>
+            <p class="note-desc">
               Direct, authenticated binary WebSocket connection to your registered broker API (Zerodha Kite Connect, Upstox v2).
               Sub-millisecond local tick normalization and Level-2 5-depth order books.
             </p>
           </div>
 
-          <div class="data-mode-card">
-            <span class="mode-badge mode-delayed">DELAYED</span>
-            <h3 class="mode-title">Delayed Snapshots</h3>
-            <p class="mode-desc">
+          <div class="mode-paper-card">
+            <span class="mode-badge-pill badge-delayed">DELAYED</span>
+            <h3 class="note-title">Delayed Snapshots</h3>
+            <p class="note-desc">
               Exchange-delayed quotes suited for post-session study and non-critical analytical inspection.
               Permanently labeled with feed lag indicators in the terminal header.
             </p>
           </div>
 
-          <div class="data-mode-card">
-            <span class="mode-badge mode-historical">HISTORICAL</span>
-            <h3 class="mode-title">Aggregated Bars</h3>
-            <p class="mode-desc">
+          <div class="mode-paper-card">
+            <span class="mode-badge-pill badge-historical">HISTORICAL</span>
+            <h3 class="note-title">Aggregated Bars</h3>
+            <p class="note-desc">
               Daily and intraday historical OHLCV candle bars fetched from authenticated broker endpoints or cached locally
               in a local SQLite database for offline analysis.
             </p>
           </div>
 
-          <div class="data-mode-card">
-            <span class="mode-badge mode-simulated">SIMULATED</span>
-            <h3 class="mode-title">Offline Mock Engine</h3>
-            <p class="mode-desc">
+          <div class="mode-paper-card">
+            <span class="mode-badge-pill badge-simulated">SIMULATED</span>
+            <h3 class="note-title">Offline Mock Engine</h3>
+            <p class="note-desc">
               Deterministic price and volatility simulation engine designed for testing keybindings, layouts,
               and Black-Scholes Greeks calculations outside trading hours without requiring broker credentials.
             </p>
           </div>
         </div>
 
-        <div class="transparency-notice-box">
+        <div class="transparency-disclosure-box">
           <p>
             <strong>Data Access Disclosure:</strong> Eudaimonia is personal analytical client software.
             It does not resell, publicly broadcast, or redistribute raw exchange market data.
@@ -679,41 +703,46 @@ Target Markets: National Stock Exchange (NSE) &amp; Bombay Stock Exchange (BSE)
     </section>
 
     <!-- ====================================================================
-         How It Works Section
+         How It Works Section: 3 Tactile Physical Tickets
          ==================================================================== -->
     <section class="workflow-section" aria-labelledby="workflow-title">
       <div class="container">
-        <div class="section-header">
-          <div class="section-kicker">Architecture</div>
-          <h2 id="workflow-title" class="section-title">Direct workflow. Minimal setup.</h2>
-          <p class="section-subtitle">
-            Designed for software engineers and quantitative traders who demand clean control over their analytical environment.
+        <div class="section-head-editorial">
+          <div>
+            <span class="section-label-chip">04 // ARCHITECTURE</span>
+            <h2 id="workflow-title" class="editorial-title">Direct workflow. Minimal setup.</h2>
+          </div>
+          <p class="editorial-subtitle">
+            Designed for software engineers and quantitative traders who demand complete control over their environment.
           </p>
         </div>
 
-        <div class="workflow-steps-grid">
-          <div class="workflow-step">
-            <span class="step-num">STEP 01</span>
-            <h3 class="step-title">Connect your data provider</h3>
-            <p class="step-desc">
-              Configure your preferred broker adapter in your local <code class="mono text-primary">.env</code> file
+        <div class="workflow-tickets-grid">
+          <div class="workflow-ticket">
+            <div class="ticket-notch" aria-hidden="true"></div>
+            <span class="ticket-step-num">STEP 01</span>
+            <h3 class="ticket-title">Connect your provider</h3>
+            <p class="ticket-desc">
+              Configure your preferred broker adapter in your local <code class="mono text-ink">.env</code> file
               (Zerodha Kite Connect or Upstox v2), or launch immediately with the zero-configuration offline mock simulator.
             </p>
           </div>
 
-          <div class="workflow-step">
-            <span class="step-num">STEP 02</span>
-            <h3 class="step-title">Select contracts and underlyings</h3>
-            <p class="step-desc">
-              Specify your target index benchmarks (<code class="mono text-primary">NIFTY</code>, <code class="mono text-primary">BANKNIFTY</code>, <code class="mono text-primary">FINNIFTY</code>)
+          <div class="workflow-ticket">
+            <div class="ticket-notch" aria-hidden="true"></div>
+            <span class="ticket-step-num">STEP 02</span>
+            <h3 class="ticket-title">Select underlyings</h3>
+            <p class="ticket-desc">
+              Specify your target index benchmarks (<code class="mono text-ink">NIFTY</code>, <code class="mono text-ink">BANKNIFTY</code>, <code class="mono text-ink">FINNIFTY</code>)
               or active equity watchlists to stream real-time quotes, options strike ladders, and 5-depth order books.
             </p>
           </div>
 
-          <div class="workflow-step">
-            <span class="step-num">STEP 03</span>
-            <h3 class="step-title">Analyze via terminal interface</h3>
-            <p class="step-desc">
+          <div class="workflow-ticket">
+            <div class="ticket-notch" aria-hidden="true"></div>
+            <span class="ticket-step-num">STEP 03</span>
+            <h3 class="ticket-title">Analyze via terminal</h3>
+            <p class="ticket-desc">
               Inspect live strike-by-strike Black-Scholes Greeks, Put-Call Ratios, Max Pain levels, and intraday candlestick charts
               with zero mouse latency.
             </p>
@@ -723,83 +752,63 @@ Target Markets: National Stock Exchange (NSE) &amp; Bombay Stock Exchange (BSE)
     </section>
 
     <!-- ====================================================================
-         Built for Focus Section (Keybinding Reference Matrix)
+         Built for Focus: Interactive Keyboard Playground
          ==================================================================== -->
     <section class="focus-section" aria-labelledby="focus-title">
       <div class="container">
-        <div class="focus-layout">
-          <div class="focus-text-block">
-            <div class="section-kicker">Ergonomics</div>
-            <h2 id="focus-title" class="focus-headline">Less interface. More information.</h2>
-            <p class="focus-body">
+        <div class="focus-split-layout">
+          <div>
+            <span class="section-label-chip">05 // ERGONOMICS</span>
+            <h2 id="focus-title" class="editorial-title">Less interface. More information.</h2>
+            <p class="philosophy-body-text" style="margin-top: 1rem; margin-bottom: 1.5rem;">
               Designed for people who prefer direct access to market information over decorative dashboards.
               Eudaimonia prioritizes readable numbers, deliberate navigation, and a workspace that stays out of the way.
             </p>
-            <p class="focus-body">
-              Every operation can be triggered instantly from the keyboard. The terminal responds with deterministic
-              sub-millisecond latency, keeping you focused during high-velocity trading sessions.
+            <p class="philosophy-body-text">
+              Try the interactive keyboard playground on the right: press <span class="keycap">/</span> to focus,
+              navigate instruments with <span class="keycap">&uarr;</span> and <span class="keycap">&darr;</span>,
+              and press <span class="keycap">Enter</span> to dispatch into the terminal preview!
             </p>
           </div>
 
-          <div class="shortcuts-table-container">
-            <table class="shortcuts-table" aria-label="Keyboard Navigation Shortcuts">
-              <thead>
-                <tr>
-                  <th scope="col" style="width: 140px;">KEY</th>
-                  <th scope="col">ACTION &amp; SCOPE</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><span class="key-tag">F1</span></td>
-                  <td class="shortcut-desc">Display Help and Command Reference Manual</td>
-                </tr>
-                <tr>
-                  <td><span class="key-tag">F2</span></td>
-                  <td class="shortcut-desc">Market Overview (Indices benchmarks and watchlist quotes)</td>
-                </tr>
-                <tr>
-                  <td><span class="key-tag">F3</span></td>
-                  <td class="shortcut-desc">Options Chain (Calls/Puts, Greeks, PCR, Max Pain)</td>
-                </tr>
-                <tr>
-                  <td><span class="key-tag">F4</span></td>
-                  <td class="shortcut-desc">Detailed Quote &amp; Level-2 5-Depth Order Book</td>
-                </tr>
-                <tr>
-                  <td><span class="key-tag">F5</span></td>
-                  <td class="shortcut-desc">Candlestick Chart (OHLC, Volume, VWAP, Crosshair)</td>
-                </tr>
-                <tr>
-                  <td><span class="key-tag">F6</span></td>
-                  <td class="shortcut-desc">Watchlists Management Screen</td>
-                </tr>
-                <tr>
-                  <td><span class="key-tag">[</span> and <span class="key-tag">]</span></td>
-                  <td class="shortcut-desc">Cycle through weekly and monthly options expiry dates</td>
-                </tr>
-                <tr>
-                  <td><span class="key-tag">-</span> and <span class="key-tag">+</span></td>
-                  <td class="shortcut-desc">Shrink or expand visible strike range around ATM strike</td>
-                </tr>
-                <tr>
-                  <td><span class="key-tag">1, 3, 5, f, d</span></td>
-                  <td class="shortcut-desc">Switch chart timeframe (1m, 3m, 5m, 15m, 1d)</td>
-                </tr>
-                <tr>
-                  <td><span class="key-tag">:</span> or <span class="key-tag">/</span></td>
-                  <td class="shortcut-desc">Open Vim-style interactive command prompt</td>
-                </tr>
-                <tr>
-                  <td><span class="key-tag">ESC</span></td>
-                  <td class="shortcut-desc">Cancel active prompt or return to Market Overview</td>
-                </tr>
-                <tr>
-                  <td><span class="key-tag">q</span></td>
-                  <td class="shortcut-desc">Quit application cleanly</td>
-                </tr>
-              </tbody>
-            </table>
+          <!-- Interactive Keyboard Search Playground Box -->
+          <div class="interactive-keyboard-box">
+            <div class="keyboard-box-header">
+              <span class="mono" style="font-size: 0.8rem; font-weight: 700;">TACTILE INSTRUMENT SEARCH</span>
+              <span class="keycap">PRESS &lsquo;/&rsquo;</span>
+            </div>
+
+            <div class="keyboard-search-field-wrap">
+              <span class="mono" style="font-weight: 700;">&gt;</span>
+              <input type="text" id="playground-search-input" class="keyboard-search-field" placeholder="Press '/' or click here, then use &uarr;&darr; + Enter..." autocomplete="off">
+            </div>
+
+            <div class="instrument-select-list" role="listbox" aria-label="Sample Instruments">
+              <div class="instrument-row active" data-symbol="NIFTY" role="option" aria-selected="true">
+                <span class="font-bold">NSE:NIFTY 50</span>
+                <span class="text-secondary">Spot: 24,852.15 [INDEX]</span>
+              </div>
+              <div class="instrument-row" data-symbol="BANKNIFTY" role="option" aria-selected="false">
+                <span class="font-bold">NSE:BANKNIFTY</span>
+                <span class="text-secondary">Spot: 51,920.80 [INDEX]</span>
+              </div>
+              <div class="instrument-row" data-symbol="FINNIFTY" role="option" aria-selected="false">
+                <span class="font-bold">NSE:FINNIFTY</span>
+                <span class="text-secondary">Spot: 24,115.50 [INDEX]</span>
+              </div>
+              <div class="instrument-row" data-symbol="RELIANCE" role="option" aria-selected="false">
+                <span class="font-bold">NSE:RELIANCE</span>
+                <span class="text-secondary">LTP: 3,042.50 [EQUITY]</span>
+              </div>
+              <div class="instrument-row" data-symbol="HDFCBANK" role="option" aria-selected="false">
+                <span class="font-bold">NSE:HDFCBANK</span>
+                <span class="text-secondary">LTP: 1,685.20 [EQUITY]</span>
+              </div>
+            </div>
+
+            <div id="playground-status-msg" class="mono text-muted" style="margin-top: 0.85rem; font-size: 0.74rem;">
+              Use Arrow keys &uarr; &darr; and press Enter to select an instrument.
+            </div>
           </div>
         </div>
       </div>
@@ -810,48 +819,50 @@ Target Markets: National Stock Exchange (NSE) &amp; Bombay Stock Exchange (BSE)
          ==================================================================== -->
     <section id="quickstart" class="developer-section" aria-labelledby="developer-title">
       <div class="container">
-        <div class="section-header">
-          <div class="section-kicker">Developer Access</div>
-          <h2 id="developer-title" class="section-title">Built in the open.</h2>
-          <p class="section-subtitle">
-            Eudaimonia is created by <a href="https://github.com/shomay12" class="creator-link" target="_blank" rel="noopener noreferrer">Shomay Singh Parihar</a> (<a href="https://github.com/shomay12" class="text-primary font-mono font-bold" target="_blank" rel="noopener noreferrer">@shomay12</a>).
+        <div class="section-head-editorial">
+          <div>
+            <span class="section-label-chip">06 // OPEN SOURCE</span>
+            <h2 id="developer-title" class="editorial-title">Built in the open.</h2>
+          </div>
+          <p class="editorial-subtitle">
+            Eudaimonia is created by <a href="https://github.com/shomay12" class="creator-attribution-link" target="_blank" rel="noopener noreferrer">Shomay Singh Parihar</a> (<a href="https://github.com/shomay12" class="text-ink font-mono font-bold" target="_blank" rel="noopener noreferrer">@shomay12</a>).
             The Python terminal codebase is engineered for modularity, clean typing, and offline extensibility.
           </p>
         </div>
 
-        <div class="dev-layout">
+        <div class="dev-editorial-split">
           <!-- Quickstart Code Box -->
-          <div class="code-block-wrapper">
-            <div class="code-block-header">
+          <div class="code-console-panel">
+            <div class="console-titlebar">
               <span>INSTALLATION &amp; QUICKSTART</span>
-              <button type="button" class="copy-btn" data-target="quickstart-code" aria-label="Copy terminal commands to clipboard">[COPY]</button>
+              <button type="button" class="copy-key-btn" data-target="quickstart-code" aria-label="Copy terminal commands to clipboard">[COPY]</button>
             </div>
-            <pre class="code-content" id="quickstart-code"><code><span class="code-comment"># 1. Clone the repository</span>
-<span class="code-cmd">git clone</span> https://github.com/shomay12/eudaimonia.git
-<span class="code-cmd">cd</span> eudaimonia
+            <pre class="code-terminal-pre" id="quickstart-code"><code><span class="c-comment"># 1. Clone the repository</span>
+<span class="c-cmd">git clone</span> https://github.com/shomay12/eudaimonia.git
+<span class="c-cmd">cd</span> eudaimonia
 
-<span class="code-comment"># 2. Create and activate a Python 3.11+ virtual environment</span>
-<span class="code-cmd">python3</span> -m venv .venv
-<span class="code-cmd">source</span> .venv/bin/activate
+<span class="c-comment"># 2. Create and activate a Python 3.11+ virtual environment</span>
+<span class="c-cmd">python3</span> -m venv .venv
+<span class="c-cmd">source</span> .venv/bin/activate
 
-<span class="code-comment"># 3. Install dependencies in editable mode</span>
-<span class="code-cmd">pip install</span> -e .
+<span class="c-comment"># 3. Install dependencies in editable mode</span>
+<span class="c-cmd">pip install</span> -e .
 
-<span class="code-comment"># 4. Configure local environment file</span>
-<span class="code-cmd">cp</span> .env.example .env
+<span class="c-comment"># 4. Configure local environment file</span>
+<span class="c-cmd">cp</span> .env.example .env
 
-<span class="code-comment"># 5. Launch terminal in offline mock simulation mode</span>
-<span class="code-cmd">eudaimonia</span> --mode MOCK --underlying NIFTY</code></pre>
+<span class="c-comment"># 5. Launch terminal in offline mock simulation mode</span>
+<span class="c-cmd">eudaimonia</span> --mode MOCK --underlying NIFTY</code></pre>
           </div>
 
           <!-- CLI Reference Table -->
           <div>
-            <h3 class="font-bold text-primary" style="font-size: 1.15rem; margin-bottom: 0.5rem;">Command Line Flags</h3>
-            <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 1rem;">
-              The <code class="mono text-primary">eudaimonia</code> executable accepts runtime arguments to configure data modes, exchanges, and default symbols without editing code.
+            <h3 class="font-bold text-ink" style="font-size: 1.25rem; margin-bottom: 0.5rem;">Command Line Flags</h3>
+            <p class="text-secondary" style="font-size: 0.95rem; margin-bottom: 1rem;">
+              The <code class="mono text-ink">eudaimonia</code> executable accepts runtime arguments to configure data modes, exchanges, and default symbols without editing code.
             </p>
 
-            <table class="cli-flags-table" aria-label="CLI Command Line Flags">
+            <table class="cli-flags-paper-table" aria-label="CLI Command Line Flags">
               <thead>
                 <tr>
                   <th scope="col">FLAG</th>
@@ -861,37 +872,39 @@ Target Markets: National Stock Exchange (NSE) &amp; Bombay Stock Exchange (BSE)
               </thead>
               <tbody>
                 <tr>
-                  <td class="flag-name">--provider, -p</td>
+                  <td class="font-bold text-ink">--provider, -p</td>
                   <td class="mono">mock, kite, upstox, dhan</td>
                   <td>Market data provider adapter (default: <span class="mono">mock</span>)</td>
                 </tr>
                 <tr>
-                  <td class="flag-name">--mode, -m</td>
+                  <td class="font-bold text-ink">--mode, -m</td>
                   <td class="mono">MOCK, LIVE, HISTORICAL, DELAYED</td>
                   <td>Runtime data feed mode (default: <span class="mono">MOCK</span>)</td>
                 </tr>
                 <tr>
-                  <td class="flag-name">--exchange, -e</td>
+                  <td class="font-bold text-ink">--exchange, -e</td>
                   <td class="mono">NSE, BSE</td>
                   <td>Default primary exchange (default: <span class="mono">NSE</span>)</td>
                 </tr>
                 <tr>
-                  <td class="flag-name">--underlying, -u</td>
+                  <td class="font-bold text-ink">--underlying, -u</td>
                   <td class="mono">NIFTY, BANKNIFTY, FINNIFTY</td>
                   <td>Default active underlying (default: <span class="mono">NIFTY</span>)</td>
                 </tr>
                 <tr>
-                  <td class="flag-name">--version, -v</td>
+                  <td class="font-bold text-ink">--version, -v</td>
                   <td class="mono">—</td>
                   <td>Display application version and author metadata</td>
                 </tr>
               </tbody>
             </table>
 
-            <div style="margin-top: 1.5rem; display: flex; gap: 1rem; align-items: center;">
-              <a href="https://github.com/shomay12" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
-                Explore GitHub Repository
-              </a>
+            <div style="margin-top: 1.75rem;">
+              <div class="magnetic-wrap">
+                <a href="https://github.com/shomay12" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                  Explore GitHub Repository
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -903,13 +916,17 @@ Target Markets: National Stock Exchange (NSE) &amp; Bombay Stock Exchange (BSE)
          ==================================================================== -->
     <section class="final-cta-section" aria-labelledby="cta-title">
       <div class="container">
-        <div class="final-cta-content">
+        <div class="final-cta-inner">
           <h2 id="cta-title" class="final-headline">A more focused way to read the markets.</h2>
           <p class="final-subtitle">Explore Eudaimonia and follow its development.</p>
 
-          <div class="final-actions">
-            <a href="#quickstart" class="btn btn-primary">Get Started</a>
-            <a href="https://github.com/shomay12" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">View GitHub</a>
+          <div class="final-btn-row">
+            <div class="magnetic-wrap">
+              <a href="#quickstart" class="btn btn-primary">Get Started</a>
+            </div>
+            <div class="magnetic-wrap">
+              <a href="https://github.com/shomay12" class="btn btn-accent" target="_blank" rel="noopener noreferrer">View GitHub</a>
+            </div>
           </div>
         </div>
       </div>
@@ -922,33 +939,33 @@ Target Markets: National Stock Exchange (NSE) &amp; Bombay Stock Exchange (BSE)
        ======================================================================== -->
   <footer class="site-footer" role="contentinfo">
     <div class="container-wide">
-      <div class="footer-top">
-        <div class="footer-brand-col">
-          <span class="footer-wordmark">EUDAIMONIA</span>
-          <p class="footer-tagline">Market intelligence for Indian markets.</p>
+      <div class="footer-top-row">
+        <div>
+          <span class="footer-brand-title">EUDAIMONIA</span>
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 0.35rem;">Market intelligence for Indian markets.</p>
         </div>
 
-        <div class="footer-links-col">
-          <a href="#preview" class="footer-link">Product</a>
-          <a href="#capabilities" class="footer-link">Features</a>
-          <a href="#transparency" class="footer-link">Data</a>
-          <a href="#quickstart" class="footer-link">Documentation</a>
-          <a href="https://github.com/shomay12" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-        </div>
+        <nav class="footer-nav-list" aria-label="Footer Navigation">
+          <a href="#preview" class="footer-link-item">Product</a>
+          <a href="#capabilities" class="footer-link-item">Features</a>
+          <a href="#transparency" class="footer-link-item">Data</a>
+          <a href="#quickstart" class="footer-link-item">Documentation</a>
+          <a href="https://github.com/shomay12" class="footer-link-item" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </nav>
       </div>
 
       <!-- Creator Attribution Strip -->
-      <div class="footer-attribution">
+      <div class="footer-attribution-band">
         <div>
-          Built by <a href="https://github.com/shomay12" class="creator-link" target="_blank" rel="noopener noreferrer">Shomay Singh Parihar</a> · <a href="https://github.com/shomay12" class="creator-link" target="_blank" rel="noopener noreferrer">@shomay12</a>
+          Built by <a href="https://github.com/shomay12" class="creator-attribution-link" target="_blank" rel="noopener noreferrer">Shomay Singh Parihar</a> · <a href="https://github.com/shomay12" class="creator-attribution-link" target="_blank" rel="noopener noreferrer">@shomay12</a>
         </div>
         <div class="text-muted">
-          Quaxiom Trade Terminal // v0.1.0
+          Quaxiom Trade Terminal // v0.1.0 // Light Edition
         </div>
       </div>
 
       <!-- Regulatory & Informational Disclaimer -->
-      <div class="footer-disclaimer">
+      <div class="footer-legal-copy">
         <p>
           <strong>Disclaimer:</strong> Eudaimonia is an analytical and educational software tool. It does not provide financial advice,
           investment recommendations, or securities broker-dealer services. All options pricing and Greek metrics are theoretical estimates

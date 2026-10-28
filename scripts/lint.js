@@ -47,7 +47,8 @@ report(html.includes("@shomay12"), "@shomay12 username credited");
 report(html.includes("https://github.com/shomay12"), "Verified GitHub profile URL linked");
 
 // 5. Check Section Headlines
-report(html.includes("The markets, without the noise."), "Hero headline 'The markets, without the noise.' present");
+const hasHeroHeadline = /The markets,[\s\S]*?without the noise\./i.test(html);
+report(hasHeroHeadline, "Hero headline 'The markets, without the noise.' present");
 report(html.includes("Clarity is a competitive advantage."), "Philosophy headline 'Clarity is a competitive advantage.' present");
 report(html.includes("Know what you’re looking at."), "Data transparency headline 'Know what you’re looking at.' present");
 report(html.includes("Less interface. More information."), "Ergonomics headline 'Less interface. More information.' present");
@@ -86,3 +87,4 @@ if (errors > 0) {
   console.log("\nAll quality & design linting checks passed successfully.");
   process.exit(0);
 }
+

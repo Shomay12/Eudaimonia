@@ -1,10 +1,14 @@
 /**
- * Eudaimonia Application Controller
- * Handles interactive terminal preview, screen switching, keyboard shortcuts,
- * command line processing, candlestick chart rendering, and accessible navigation.
+ * Eudaimonia Application Controller — Experimental Light & Tactile Edition
+ * Author & Creator: Shomay Singh Parihar (@shomay12)
  *
- * Creator Attribution: Shomay Singh Parihar · @shomay12
- * GitHub: https://github.com/shomay12
+ * Implements:
+ * - Magnetic buttons with smooth pointer attraction
+ * - Touch & pointer draggable instrument token
+ * - 3D cursor-aware terminal chassis perspective tilt
+ * - Real-time Black-Scholes Greek sensitivity scrubbers
+ * - Interactive keyboard navigation playground (press '/' + arrows + Enter)
+ * - Complete terminal simulation: Options Chain, Candlestick Chart, 5-Depth Book, Vim prompt
  */
 
 import {
@@ -12,6 +16,7 @@ import {
   generateOptionsChain,
   generateCandleBars,
   generateMarketDepth,
+  calculateGreeks,
 } from "./terminal-engine.js";
 
 export const CREATOR_CONFIG = {
@@ -31,9 +36,13 @@ class EudaimoniaWebsiteApp {
 
   init() {
     this.setupNavigation();
+    this.setupTactileInteractions();
+    this.setupDraggableToken();
     this.setupTerminalPreview();
     this.setupTerminalKeybindings();
     this.setupCommandLine();
+    this.setupKeyboardPlayground();
+    this.setupGreekSimulator();
     this.setupCodeBlockCopy();
     this.renderAllScreens();
     this.startClock();
@@ -54,7 +63,6 @@ class EudaimoniaWebsiteApp {
         mobileToggle.textContent = !isExpanded ? "[CLOSE]" : "[MENU]";
       });
 
-      // Close mobile menu on nav link click
       navMenu.querySelectorAll(".nav-link").forEach((link) => {
         link.addEventListener("click", () => {
           navMenu.classList.remove("mobile-open");
@@ -66,7 +74,211 @@ class EudaimoniaWebsiteApp {
   }
 
   // ------------------------------------------------------------------------
-  // Terminal Preview Tabs & Screens
+  // Tactile Interactions: Magnetic Buttons & 3D Cursor Tilt
+  // ------------------------------------------------------------------------
+  setupTactileInteractions() {
+    // Check prefers-reduced-motion
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    // 1. Magnetic Buttons
+    const magneticElements = document.querySelectorAll(".magnetic-wrap");
+    magneticElements.forEach((wrap) => {
+      wrap.addEventListener("mousemove", (e) => {
+        const rect = wrap.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const deltaX = (e.clientX - centerX) * 0.22;
+        const deltaY = (e.clientY - centerY) * 0.22;
+        wrap.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+      });
+
+      wrap.addEventListener("mouseleave", () => {
+        wrap.style.transform = "translate(0px, 0px)";
+      });
+    });
+
+    // 2. 3D Cursor-Aware Terminal Chassis Tilt
+    const heroRight = document.querySelector(".hero-right-col");
+    const chassis = document.querySelector(".terminal-chassis");
+    if (heroRight && chassis) {
+      heroRight.addEventListener("mousemove", (e) => {
+        const rect = heroRight.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        const rotateX = -y * 6; // Max 3 deg
+        const rotateY = x * 7;
+        chassis.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+      });
+
+      heroRight.addEventListener("mouseleave", () => {
+        chassis.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg)";
+      });
+    }
+  }
+
+  // ------------------------------------------------------------------------
+  // Draggable Floating Instrument Token
+  // ------------------------------------------------------------------------
+  setupDraggableToken() {
+    const token = document.querySelector(".draggable-token");
+    if (!token) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
+    const onPointerDown = (e) => {
+      isDragging = true;
+      startX = e.clientX - currentX;
+      startY = e.clientY - currentY;
+      token.setPointerCapture(e.pointerId);
+      token.style.cursor = "grabbing";
+      token.style.zIndex = "100";
+    };
+
+    const onPointerMove = (e) => {
+      if (!isDragging) return;
+      currentX = e.clientX - startX;
+      currentY = e.clientY - startY;
+      token.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+    };
+
+    const onPointerUp = (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      try {
+        token.releasePointerCapture(e.pointerId);
+      } catch (err) {
+        // Safe fallback
+      }
+      token.style.cursor = "grab";
+    };
+
+    token.addEventListener("pointerdown", onPointerDown);
+    token.addEventListener("pointermove", onPointerMove);
+    token.addEventListener("pointerup", onPointerUp);
+    token.addEventListener("pointercancel", onPointerUp);
+  }
+
+  // ------------------------------------------------------------------------
+  // Interactive Keyboard Navigation Playground (Focus Section)
+  // ------------------------------------------------------------------------
+  setupKeyboardPlayground() {
+    const searchInput = document.querySelector("#playground-search-input");
+    const rows = document.querySelectorAll(".instrument-row");
+    let activeIdx = 0;
+
+    if (!searchInput || rows.length === 0) return;
+
+    const setActive = (idx) => {
+      rows.forEach((r, i) => {
+        if (i === idx) {
+          r.classList.add("active");
+          r.setAttribute("aria-selected", "true");
+        } else {
+          r.classList.remove("active");
+          r.setAttribute("aria-selected", "false");
+        }
+      });
+      activeIdx = idx;
+    };
+
+    rows.forEach((row, i) => {
+      row.addEventListener("click", () => {
+        setActive(i);
+        const sym = row.dataset.symbol;
+        if (sym) {
+          this.loadInstrumentIntoTerminal(sym);
+        }
+      });
+    });
+
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const next = (activeIdx + 1) % rows.length;
+        setActive(next);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        const prev = (activeIdx - 1 + rows.length) % rows.length;
+        setActive(prev);
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        const selected = rows[activeIdx];
+        if (selected) {
+          const sym = selected.dataset.symbol;
+          this.loadInstrumentIntoTerminal(sym);
+          const feedback = document.querySelector("#playground-status-msg");
+          if (feedback) {
+            feedback.textContent = `[LOADED] ${sym} dispatched to Terminal Chain`;
+          }
+        }
+      }
+    });
+
+    // Global shortcut to focus playground search when '/' is pressed outside an input
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "/" && document.activeElement !== searchInput && document.activeElement.id !== "cmd-input-field") {
+        const playgroundBox = document.querySelector(".interactive-keyboard-box");
+        if (playgroundBox) {
+          // If in viewport or user pressed slash, focus it
+          e.preventDefault();
+          searchInput.focus();
+        }
+      }
+    });
+  }
+
+  loadInstrumentIntoTerminal(sym) {
+    if (sym === "NIFTY" || sym === "BANKNIFTY" || sym === "FINNIFTY") {
+      this.state.activeUnderlying = sym;
+      this.chainData = generateOptionsChain(sym, this.state.activeExpiryIndex);
+      this.renderOptionsChain();
+      this.switchScreen("chain");
+    } else {
+      this.switchScreen("depth");
+    }
+
+    const targetLabel = document.querySelector("#footer-active-target");
+    if (targetLabel) {
+      targetLabel.textContent = sym;
+    }
+  }
+
+  // ------------------------------------------------------------------------
+  // Greek Sensitivity Interactive Slider (Options Card)
+  // ------------------------------------------------------------------------
+  setupGreekSimulator() {
+    const ivSlider = document.querySelector("#greek-iv-slider");
+    const ivValLabel = document.querySelector("#greek-iv-val");
+    const deltaEl = document.querySelector("#sim-greek-delta");
+    const gammaEl = document.querySelector("#sim-greek-gamma");
+    const thetaEl = document.querySelector("#sim-greek-theta");
+    const vegaEl = document.querySelector("#sim-greek-vega");
+
+    if (!ivSlider) return;
+
+    const updateGreeks = () => {
+      const iv = parseFloat(ivSlider.value) / 100.0;
+      if (ivValLabel) ivValLabel.textContent = `${ivSlider.value}%`;
+
+      const greeks = calculateGreeks(24850, 24850, 7, 0.065, iv);
+      if (deltaEl) deltaEl.textContent = greeks.callDelta.toFixed(2);
+      if (gammaEl) gammaEl.textContent = (greeks.gamma * 100).toFixed(3);
+      if (thetaEl) thetaEl.textContent = greeks.thetaCall.toFixed(2);
+      if (vegaEl) vegaEl.textContent = greeks.vega.toFixed(2);
+    };
+
+    ivSlider.addEventListener("input", updateGreeks);
+    updateGreeks();
+  }
+
+  // ------------------------------------------------------------------------
+  // Terminal Preview Screen Tabs
   // ------------------------------------------------------------------------
   setupTerminalPreview() {
     const tabs = document.querySelectorAll(".screen-tab");
@@ -81,7 +293,6 @@ class EudaimoniaWebsiteApp {
       });
     });
 
-    // Chart Interval Buttons
     const intervalBtns = document.querySelectorAll(".chart-interval-btn");
     intervalBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -90,7 +301,6 @@ class EudaimoniaWebsiteApp {
       });
     });
 
-    // Expiry Cycle Buttons (in chain summary bar)
     const prevExpiryBtn = document.querySelector("#btn-prev-expiry");
     const nextExpiryBtn = document.querySelector("#btn-next-expiry");
     if (prevExpiryBtn && nextExpiryBtn) {
@@ -102,7 +312,6 @@ class EudaimoniaWebsiteApp {
   switchScreen(screenName) {
     this.state.activeScreen = screenName;
 
-    // Update active tab styles
     document.querySelectorAll(".screen-tab").forEach((tab) => {
       if (tab.dataset.screen === screenName) {
         tab.classList.add("active");
@@ -113,7 +322,6 @@ class EudaimoniaWebsiteApp {
       }
     });
 
-    // Toggle screen viewports
     document.querySelectorAll(".terminal-screen").forEach((screen) => {
       if (screen.id === `screen-${screenName}`) {
         screen.classList.add("active");
@@ -122,7 +330,6 @@ class EudaimoniaWebsiteApp {
       }
     });
 
-    // Update terminal footer target label
     const targetLabel = document.querySelector("#footer-active-target");
     if (targetLabel) {
       targetLabel.textContent = this.state.activeUnderlying;
@@ -158,7 +365,6 @@ class EudaimoniaWebsiteApp {
   // ------------------------------------------------------------------------
   setupTerminalKeybindings() {
     window.addEventListener("keydown", (e) => {
-      // Don't intercept if user is typing in an active input field outside terminal
       const activeEl = document.activeElement;
       const isInput = activeEl && (activeEl.tagName === "INPUT" || activeEl.tagName === "TEXTAREA");
 
@@ -166,9 +372,8 @@ class EudaimoniaWebsiteApp {
         return;
       }
 
-      // Handle Escape
       if (e.key === "Escape") {
-        const cmdBar = document.querySelector(".terminal-cmd-bar");
+        const cmdBar = document.querySelector(".terminal-command-bar");
         if (cmdBar && cmdBar.classList.contains("visible")) {
           e.preventDefault();
           this.closeCommandLine();
@@ -176,7 +381,6 @@ class EudaimoniaWebsiteApp {
         }
       }
 
-      // If command line is open, only handle Enter and Escape
       if (activeEl && activeEl.id === "cmd-input-field") {
         return;
       }
@@ -207,7 +411,6 @@ class EudaimoniaWebsiteApp {
           this.switchScreen("overview");
           break;
         case ":":
-        case "/":
           e.preventDefault();
           this.openCommandLine();
           break;
@@ -290,13 +493,13 @@ class EudaimoniaWebsiteApp {
       if (matches.length > 0) {
         cmdFeedback.textContent = `Matches: ${matches.join(", ")}`;
       } else {
-        cmdFeedback.textContent = `Unknown command. Type 'help' for reference.`;
+        cmdFeedback.textContent = "Unknown command. Type 'help' for reference.";
       }
     });
   }
 
   openCommandLine() {
-    const cmdBar = document.querySelector(".terminal-cmd-bar");
+    const cmdBar = document.querySelector(".terminal-command-bar");
     const cmdInput = document.querySelector("#cmd-input-field");
     const cmdFeedback = document.querySelector("#cmd-feedback-text");
     if (cmdBar && cmdInput) {
@@ -308,14 +511,14 @@ class EudaimoniaWebsiteApp {
   }
 
   closeCommandLine() {
-    const cmdBar = document.querySelector(".terminal-cmd-bar");
+    const cmdBar = document.querySelector(".terminal-command-bar");
     if (cmdBar) {
       cmdBar.classList.remove("visible");
     }
   }
 
   toggleCommandLine() {
-    const cmdBar = document.querySelector(".terminal-cmd-bar");
+    const cmdBar = document.querySelector(".terminal-command-bar");
     if (cmdBar && cmdBar.classList.contains("visible")) {
       this.closeCommandLine();
     } else {
@@ -404,10 +607,10 @@ class EudaimoniaWebsiteApp {
 
       const callOIChgSign = row.calls.oiChg >= 0 ? "+" : "";
       const putOIChgSign = row.puts.oiChg >= 0 ? "+" : "";
-      const callChgColor = row.calls.oiChg >= 0 ? "val-up" : "val-down";
-      const putChgColor = row.puts.oiChg >= 0 ? "val-up" : "val-down";
+      const callChgColor = row.calls.oiChg >= 0 ? "feed-val-up" : "feed-val-down";
+      const putChgColor = row.puts.oiChg >= 0 ? "feed-val-up" : "feed-val-down";
 
-      const atmBadge = row.isATM ? `<span class="strike-badge badge-atm">ATM</span>` : "";
+      const atmPill = row.isATM ? `<span class="strike-pill">ATM</span>` : "";
 
       tr.innerHTML = `
         <td class="${callClass}">${row.calls.oi.toLocaleString("en-IN")}</td>
@@ -417,9 +620,9 @@ class EudaimoniaWebsiteApp {
         <td class="${callClass}">${row.calls.delta.toFixed(2)}</td>
         <td class="${callClass}">${row.calls.bid.toFixed(2)}</td>
         <td class="${callClass}">${row.calls.ask.toFixed(2)}</td>
-        <td class="${callClass} val-up font-bold">${row.calls.ltp.toFixed(2)}</td>
-        <td class="col-strike">${row.strike}${atmBadge}</td>
-        <td class="${putClass} val-down font-bold">${row.puts.ltp.toFixed(2)}</td>
+        <td class="${callClass} feed-val-up font-bold">${row.calls.ltp.toFixed(2)}</td>
+        <td class="col-strike">${row.strike}${atmPill}</td>
+        <td class="${putClass} feed-val-down font-bold">${row.puts.ltp.toFixed(2)}</td>
         <td class="${putClass}">${row.puts.bid.toFixed(2)}</td>
         <td class="${putClass}">${row.puts.ask.toFixed(2)}</td>
         <td class="${putClass}">${row.puts.delta.toFixed(2)}</td>
@@ -429,6 +632,14 @@ class EudaimoniaWebsiteApp {
         <td class="${putClass}">${row.puts.oi.toLocaleString("en-IN")}</td>
       `;
 
+      // Tactile strike row hover interaction
+      tr.addEventListener("mouseenter", () => {
+        tr.style.filter = "brightness(1.15)";
+      });
+      tr.addEventListener("mouseleave", () => {
+        tr.style.filter = "none";
+      });
+
       tableBody.appendChild(tr);
     });
   }
@@ -437,8 +648,8 @@ class EudaimoniaWebsiteApp {
     const container = document.querySelector("#chart-canvas-box");
     if (!container) return;
 
-    const width = container.clientWidth || 960;
-    const height = container.clientHeight || 340;
+    const width = container.clientWidth || 720;
+    const height = container.clientHeight || 320;
     const padding = { top: 20, right: 60, bottom: 40, left: 20 };
     const chartWidth = width - padding.left - padding.right;
     const chartHeight = height - padding.top - padding.bottom;
@@ -460,24 +671,21 @@ class EudaimoniaWebsiteApp {
 
     const barWidth = Math.max(4, Math.floor(chartWidth / bars.length) - 3);
 
-    let svgHtml = `<svg class="chart-svg" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">`;
+    let svgHtml = `<svg class="chart-svg" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">`;
 
-    // Horizontal Price Grid lines
     const gridSteps = 5;
     for (let i = 0; i <= gridSteps; i++) {
       const priceVal = minPrice + (i / gridSteps) * (maxPrice - minPrice);
       const y = scaleYPrice(priceVal);
       svgHtml += `
-        <line x1="${padding.left}" y1="${y}" x2="${width - padding.right}" y2="${y}" stroke="#1E2328" stroke-dasharray="2,2"/>
-        <text x="${width - padding.right + 6}" y="${y + 4}" fill="#656C75" font-family="ui-monospace, monospace" font-size="10">${priceVal.toFixed(1)}</text>
+        <line x1="${padding.left}" y1="${y}" x2="${width - padding.right}" y2="${y}" stroke="#232830" stroke-dasharray="2,2"/>
+        <text x="${width - padding.right + 6}" y="${y + 4}" fill="#64748B" font-family="ui-monospace, monospace" font-size="10">${priceVal.toFixed(1)}</text>
       `;
     }
 
-    // Volume Separator line
     const volSepY = padding.top + priceHeight + 10;
-    svgHtml += `<line x1="${padding.left}" y1="${volSepY}" x2="${width - padding.right}" y2="${volSepY}" stroke="#252A2F"/>`;
+    svgHtml += `<line x1="${padding.left}" y1="${volSepY}" x2="${width - padding.right}" y2="${volSepY}" stroke="#2A303A"/>`;
 
-    // VWAP Polyline path
     const vwapPoints = bars
       .map((b, idx) => {
         const x = padding.left + idx * (barWidth + 3) + barWidth / 2;
@@ -486,40 +694,34 @@ class EudaimoniaWebsiteApp {
       })
       .join(" ");
 
-    svgHtml += `<polyline fill="none" stroke="#D29922" stroke-width="1.2" stroke-dasharray="3,3" points="${vwapPoints}"/>`;
+    svgHtml += `<polyline fill="none" stroke="#FBBF24" stroke-width="1.3" stroke-dasharray="3,3" points="${vwapPoints}"/>`;
 
-    // Render Candles and Volume Bars
     bars.forEach((b, idx) => {
       const x = padding.left + idx * (barWidth + 3);
       const centerX = x + barWidth / 2;
-      const color = b.isUp ? "#56D39B" : "#E05D52";
+      const color = b.isUp ? "#86EFAC" : "#FCA5A5";
 
-      // Price Wick
       const wickY1 = scaleYPrice(b.high);
       const wickY2 = scaleYPrice(b.low);
       svgHtml += `<line x1="${centerX}" y1="${wickY1}" x2="${centerX}" y2="${wickY2}" stroke="${color}" stroke-width="1"/>`;
 
-      // Candle Body
       const bodyTop = scaleYPrice(Math.max(b.open, b.close));
       const bodyBottom = scaleYPrice(Math.min(b.open, b.close));
       const bodyHeight = Math.max(2, bodyBottom - bodyTop);
       svgHtml += `<rect x="${x}" y="${bodyTop}" width="${barWidth}" height="${bodyHeight}" fill="${color}"/>`;
 
-      // Volume Bar
       const volY = scaleYVolume(b.volume);
       const volHeight = Math.max(1, padding.top + priceHeight + 15 + volumeHeight - volY);
       svgHtml += `<rect x="${x}" y="${volY}" width="${barWidth}" height="${volHeight}" fill="${color}" opacity="0.35"/>`;
 
-      // Time labels every 6 bars
       if (idx % 6 === 0) {
-        svgHtml += `<text x="${x}" y="${height - 10}" fill="#656C75" font-family="ui-monospace, monospace" font-size="10">${b.timeStr}</text>`;
+        svgHtml += `<text x="${x}" y="${height - 10}" fill="#64748B" font-family="ui-monospace, monospace" font-size="10">${b.timeStr}</text>`;
       }
     });
 
     svgHtml += `</svg>`;
     container.innerHTML = svgHtml;
 
-    // Crosshair HUD update on hover
     const hud = document.querySelector("#chart-crosshair-hud");
     container.onmousemove = (e) => {
       const rect = container.getBoundingClientRect();
@@ -528,7 +730,7 @@ class EudaimoniaWebsiteApp {
 
       if (barIdx >= 0 && barIdx < bars.length && hud) {
         const b = bars[barIdx];
-        hud.textContent = `${b.timeStr} | O: ${b.open.toFixed(2)}  H: ${b.high.toFixed(2)}  L: ${b.low.toFixed(2)}  C: ${b.close.toFixed(2)}  Vol: ${(b.volume / 1000).toFixed(0)}K  VWAP: ${b.vwap.toFixed(2)}`;
+        hud.textContent = `${b.timeStr} | O: ${b.open.toFixed(2)} H: ${b.high.toFixed(2)} L: ${b.low.toFixed(2)} C: ${b.close.toFixed(2)} Vol: ${(b.volume / 1000).toFixed(0)}K VWAP: ${b.vwap.toFixed(2)}`;
       }
     };
   }
@@ -548,9 +750,9 @@ class EudaimoniaWebsiteApp {
     this.depthData.bids.forEach((b) => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td class="text-secondary">${b.orders}</td>
+        <td style="color:#92989F;">${b.orders}</td>
         <td>${b.quantity.toLocaleString("en-IN")}</td>
-        <td class="depth-bid-price">${b.price.toFixed(2)}</td>
+        <td class="depth-bid">${b.price.toFixed(2)}</td>
       `;
       bidsTable.appendChild(tr);
     });
@@ -559,9 +761,9 @@ class EudaimoniaWebsiteApp {
     this.depthData.asks.forEach((a) => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td class="depth-ask-price">${a.price.toFixed(2)}</td>
+        <td class="depth-ask">${a.price.toFixed(2)}</td>
         <td>${a.quantity.toLocaleString("en-IN")}</td>
-        <td class="text-secondary">${a.orders}</td>
+        <td style="color:#92989F;">${a.orders}</td>
       `;
       asksTable.appendChild(tr);
     });
@@ -574,26 +776,23 @@ class EudaimoniaWebsiteApp {
     container.innerHTML = "";
     Object.values(this.state.indices).forEach((idx) => {
       const card = document.createElement("div");
-      card.className = "overview-card";
+      card.className = "overview-index-card";
       const isUp = idx.change >= 0;
-      const colorClass = isUp ? "val-up" : "val-down";
+      const colorClass = isUp ? "feed-val-up" : "feed-val-down";
       const sign = isUp ? "+" : "";
 
       card.innerHTML = `
-        <div class="overview-card-header">
-          <span class="overview-sym">${idx.name}</span>
-          <span class="overview-exch">${idx.symbol.split(":")[0]}</span>
+        <div class="overview-card-top">
+          <span class="overview-name">${idx.name}</span>
+          <span style="font-size:0.7rem; color:#92989F;">${idx.symbol.split(":")[0]}</span>
         </div>
         <div class="overview-ltp font-mono ${colorClass}">${idx.ltp.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</div>
-        <div class="overview-chg font-mono ${colorClass}">${sign}${idx.change.toFixed(2)} (${sign}${idx.pctChange.toFixed(2)}%)</div>
+        <div style="font-size:0.78rem;" class="font-mono ${colorClass}">${sign}${idx.change.toFixed(2)} (${sign}${idx.pctChange.toFixed(2)}%)</div>
       `;
       container.appendChild(card);
     });
   }
 
-  // ------------------------------------------------------------------------
-  // Helper: Clock & Feed Health
-  // ------------------------------------------------------------------------
   startClock() {
     const clockEl = document.querySelector("#terminal-live-clock");
     const updateTime = () => {
@@ -607,11 +806,8 @@ class EudaimoniaWebsiteApp {
     setInterval(updateTime, 1000);
   }
 
-  // ------------------------------------------------------------------------
-  // Code Block Copy Button
-  // ------------------------------------------------------------------------
   setupCodeBlockCopy() {
-    const copyBtns = document.querySelectorAll(".copy-btn");
+    const copyBtns = document.querySelectorAll(".copy-key-btn");
     copyBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
         const targetId = btn.dataset.target;
@@ -630,7 +826,6 @@ class EudaimoniaWebsiteApp {
   }
 }
 
-// Instantiate on DOM ready
 document.addEventListener("DOMContentLoaded", () => {
   const app = new EudaimoniaWebsiteApp();
   app.init();

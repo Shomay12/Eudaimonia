@@ -1,100 +1,82 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
     <style>
-      .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
-      .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Inter, Arial, sans-serif; }
+      .mono { font-family: ui-monospace, "SF Mono", "IBM Plex Mono", Menlo, Consolas, monospace; }
+      .sans { font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+      .serif { font-family: "Instrument Serif", Georgia, serif; font-style: italic; }
     </style>
   </defs>
 
-  <!-- Background -->
-  <rect width="1200" height="630" fill="#0B0D0F"/>
-  <rect x="24" y="24" width="1152" height="582" fill="#111417" stroke="#252A2F" stroke-width="1.5"/>
-
-  <!-- Top Metadata Header -->
-  <line x1="24" y1="90" x2="1176" y2="90" stroke="#252A2F" stroke-width="1"/>
-  <text x="56" y="62" class="mono" font-size="15" fill="#56D39B" letter-spacing="1.5">EUDAIMONIA // TERMINAL V0.1.0</text>
-  <text x="440" y="62" class="mono" font-size="14" fill="#92989F">MARKET: NSE / BSE</text>
-  <text x="640" y="62" class="mono" font-size="14" fill="#92989F">FEED: MOCK / LIVE</text>
-  <text x="860" y="62" class="mono" font-size="14" fill="#92989F">BUILD: SHOMAY SINGH PARIHAR</text>
-
-  <!-- Main Headline Block -->
-  <text x="56" y="190" class="sans" font-size="56" font-weight="700" fill="#F2F3F4" letter-spacing="-1">The markets, without the noise.</text>
-  <text x="56" y="240" class="sans" font-size="22" fill="#92989F" max-width="800">Keyboard-first market intelligence and options trading terminal for Indian financial markets.</text>
-
-  <!-- Terminal Preview Frame -->
-  <rect x="56" y="290" width="1088" height="260" fill="#0B0D0F" stroke="#252A2F" stroke-width="1"/>
+  <!-- Warm Paper Foundation -->
+  <rect width="1200" height="630" fill="#F7F5F0"/>
   
-  <!-- Terminal Preview Header -->
-  <rect x="56" y="290" width="1088" height="38" fill="#171B1F" stroke="#252A2F" stroke-width="1"/>
-  <text x="76" y="315" class="mono" font-size="13" font-weight="600" fill="#F2F3F4">EUDAIMONIA</text>
-  <text x="190" y="315" class="mono" font-size="13" fill="#92989F">NIFTY 50: <tspan fill="#56D39B">24,852.15 +118.40 (+0.48%)</tspan></text>
-  <text x="540" y="315" class="mono" font-size="13" fill="#92989F">BNIFTY: <tspan fill="#56D39B">51,920.80 +342.10 (+0.66%)</tspan></text>
-  <text x="870" y="315" class="mono" font-size="13" fill="#92989F">PCR: <tspan fill="#F2F3F4">1.18</tspan> | MAX PAIN: <tspan fill="#F2F3F4">24,800</tspan></text>
+  <!-- Subtle Printed Grid Lines -->
+  <line x1="0" y1="72" x2="1200" y2="72" stroke="#E2DED4" stroke-width="1"/>
+  <line x1="0" y1="560" x2="1200" y2="560" stroke="#E2DED4" stroke-width="1"/>
+  <line x1="80" y1="0" x2="80" y2="630" stroke="#E2DED4" stroke-width="1"/>
+  <line x1="1120" y1="0" x2="1120" y2="630" stroke="#E2DED4" stroke-width="1"/>
 
-  <!-- Terminal Preview Table Header -->
-  <line x1="56" y1="360" x2="1144" y2="360" stroke="#252A2F" stroke-width="1"/>
-  <text x="76" y="348" class="mono" font-size="11" fill="#92989F">CE OI</text>
-  <text x="180" y="348" class="mono" font-size="11" fill="#92989F">CE VOL</text>
-  <text x="280" y="348" class="mono" font-size="11" fill="#92989F">CE IV</text>
-  <text x="360" y="348" class="mono" font-size="11" fill="#92989F">CE LTP</text>
-  <text x="520" y="348" class="mono" font-size="12" font-weight="700" fill="#56D39B">STRIKE</text>
-  <text x="680" y="348" class="mono" font-size="11" fill="#92989F">PE LTP</text>
-  <text x="770" y="348" class="mono" font-size="11" fill="#92989F">PE IV</text>
-  <text x="870" y="348" class="mono" font-size="11" fill="#92989F">PE VOL</text>
-  <text x="1000" y="348" class="mono" font-size="11" fill="#92989F">PE OI</text>
+  <!-- Physical Editorial Frame -->
+  <rect x="76" y="70" width="1048" height="492" fill="#FFFFFF" stroke="#121417" stroke-width="2"/>
+  <line x1="84" y1="568" x2="1130" y2="568" stroke="#121417" stroke-width="4"/>
+  <line x1="1130" y1="78" x2="1130" y2="568" stroke="#121417" stroke-width="4"/>
 
-  <!-- Row 1: 24800 (ITM Call) -->
-  <text x="76" y="392" class="mono" font-size="12" fill="#F2F3F4">2,845,150</text>
-  <text x="180" y="392" class="mono" font-size="12" fill="#92989F">892,100</text>
-  <text x="280" y="392" class="mono" font-size="12" fill="#92989F">13.2%</text>
-  <text x="360" y="392" class="mono" font-size="12" fill="#56D39B">148.50</text>
-  <rect x="495" y="375" width="130" height="24" fill="#171B1F" rx="2"/>
-  <text x="526" y="392" class="mono" font-size="13" font-weight="700" fill="#F2F3F4">24800</text>
-  <text x="680" y="392" class="mono" font-size="12" fill="#E05D52">92.10</text>
-  <text x="770" y="392" class="mono" font-size="12" fill="#92989F">13.6%</text>
-  <text x="870" y="392" class="mono" font-size="12" fill="#92989F">612,400</text>
-  <text x="1000" y="392" class="mono" font-size="12" fill="#F2F3F4">1,940,300</text>
+  <!-- Top Metadata Bar -->
+  <line x1="76" y1="124" x2="1124" y2="124" stroke="#121417" stroke-width="1.5"/>
+  <text x="100" y="103" class="mono" font-size="13" font-weight="700" fill="#121417" letter-spacing="2">EUDAIMONIA // EXP.01</text>
+  <text x="420" y="103" class="mono" font-size="12" fill="#5A5E66">MARKETS: NSE / BSE CASH &amp; DERIVATIVES</text>
+  <text x="780" y="103" class="mono" font-size="12" fill="#5A5E66">KEYBOARD-FIRST TERMINAL</text>
+  <rect x="1020" y="88" width="86" height="24" fill="#F7F5F0" stroke="#121417" stroke-width="1"/>
+  <text x="1034" y="104" class="mono" font-size="11" font-weight="700" fill="#15803D">LIGHT.V1</text>
 
-  <!-- Row 2: 24850 (ATM) -->
-  <rect x="56" y="408" width="1088" height="32" fill="#171B1F"/>
-  <text x="76" y="430" class="mono" font-size="12" fill="#F2F3F4">4,120,400</text>
-  <text x="180" y="430" class="mono" font-size="12" fill="#92989F">1,640,250</text>
-  <text x="280" y="430" class="mono" font-size="12" fill="#92989F">13.5%</text>
-  <text x="360" y="430" class="mono" font-size="12" fill="#56D39B">112.20</text>
-  <rect x="495" y="412" width="130" height="24" fill="#252A2F" rx="2"/>
-  <text x="518" y="430" class="mono" font-size="13" font-weight="700" fill="#56D39B">24850 ATM</text>
-  <text x="680" y="430" class="mono" font-size="12" fill="#E05D52">110.80</text>
-  <text x="770" y="430" class="mono" font-size="12" fill="#92989F">13.7%</text>
-  <text x="870" y="430" class="mono" font-size="12" fill="#92989F">1,418,900</text>
-  <text x="1000" y="430" class="mono" font-size="12" fill="#F2F3F4">3,892,150</text>
+  <!-- Expressive Headline -->
+  <text x="100" y="200" class="sans" font-size="64" font-weight="700" fill="#121417" letter-spacing="-2">The markets,</text>
+  <text x="100" y="270" class="serif" font-size="70" fill="#15803D" letter-spacing="-1">without the noise.</text>
+  <text x="100" y="320" class="sans" font-size="19" fill="#5A5E66" font-weight="500">Keyboard-first market intelligence and options trading terminal for Indian financial markets.</text>
 
-  <!-- Row 3: 24900 (OTM Call) -->
-  <text x="76" y="468" class="mono" font-size="12" fill="#F2F3F4">3,610,900</text>
-  <text x="180" y="468" class="mono" font-size="12" fill="#92989F">1,120,800</text>
-  <text x="280" y="468" class="mono" font-size="12" fill="#92989F">13.9%</text>
-  <text x="360" y="468" class="mono" font-size="12" fill="#56D39B">82.40</text>
-  <rect x="495" y="451" width="130" height="24" fill="#171B1F" rx="2"/>
-  <text x="526" y="468" class="mono" font-size="13" font-weight="700" fill="#F2F3F4">24900</text>
-  <text x="680" y="468" class="mono" font-size="12" fill="#E05D52">138.50</text>
-  <text x="770" y="468" class="mono" font-size="12" fill="#92989F">14.1%</text>
-  <text x="870" y="468" class="mono" font-size="12" fill="#92989F">980,100</text>
-  <text x="1000" y="468" class="mono" font-size="12" fill="#F2F3F4">2,410,600</text>
+  <!-- Tactile Terminal Chassis (Industrial console resting on paper) -->
+  <rect x="100" y="360" width="1000" height="175" fill="#121417" stroke="#121417" stroke-width="2" rx="3"/>
+  <rect x="100" y="360" width="1000" height="32" fill="#1E2328"/>
+  <circle cx="120" cy="376" r="4" fill="#4A4E57"/>
+  <circle cx="134" cy="376" r="4" fill="#4A4E57"/>
+  <circle cx="148" cy="376" r="4" fill="#4A4E57"/>
+  <text x="175" y="380" class="mono" font-size="11" fill="#92989F">EUDAIMONIA CORE // NIFTY 50 [24,852.15 +0.48%] · PCR: 1.18 · MAX PAIN: 24,800</text>
+  <text x="960" y="380" class="mono" font-size="11" font-weight="700" fill="#E69500">DEMO DATA</text>
 
-  <!-- Bottom Keybinding Bar -->
-  <line x1="56" y1="510" x2="1144" y2="510" stroke="#252A2F" stroke-width="1"/>
-  <text x="76" y="534" class="mono" font-size="12" fill="#56D39B">F1</text>
-  <text x="96" y="534" class="mono" font-size="12" fill="#92989F">Help</text>
-  <text x="156" y="534" class="mono" font-size="12" fill="#56D39B">F2</text>
-  <text x="176" y="534" class="mono" font-size="12" fill="#92989F">Overview</text>
-  <text x="260" y="534" class="mono" font-size="12" fill="#56D39B">F3</text>
-  <text x="280" y="534" class="mono" font-size="12" fill="#92989F">Chain</text>
-  <text x="350" y="534" class="mono" font-size="12" fill="#56D39B">F4</text>
-  <text x="370" y="534" class="mono" font-size="12" fill="#92989F">Depth</text>
-  <text x="440" y="534" class="mono" font-size="12" fill="#56D39B">F5</text>
-  <text x="460" y="534" class="mono" font-size="12" fill="#92989F">Chart</text>
-  <text x="530" y="534" class="mono" font-size="12" fill="#56D39B">F6</text>
-  <text x="550" y="534" class="mono" font-size="12" fill="#92989F">Watchlist</text>
-  <text x="650" y="534" class="mono" font-size="12" fill="#D29922">:</text>
-  <text x="664" y="534" class="mono" font-size="12" fill="#92989F">Cmd</text>
-  <text x="820" y="534" class="mono" font-size="12" fill="#92989F">Created by Shomay Singh Parihar · @shomay12</text>
+  <!-- Options Chain Snippet in Terminal -->
+  <line x1="100" y1="416" x2="1100" y2="416" stroke="#252A2F"/>
+  <text x="120" y="408" class="mono" font-size="11" fill="#92989F">CE OI</text>
+  <text x="240" y="408" class="mono" font-size="11" fill="#92989F">CE LTP</text>
+  <text x="360" y="408" class="mono" font-size="11" fill="#92989F">CE IV</text>
+  <text x="520" y="408" class="mono" font-size="12" font-weight="700" fill="#56D39B">STRIKE</text>
+  <text x="700" y="408" class="mono" font-size="11" fill="#92989F">PE IV</text>
+  <text x="820" y="408" class="mono" font-size="11" fill="#92989F">PE LTP</text>
+  <text x="960" y="408" class="mono" font-size="11" fill="#92989F">PE OI</text>
+
+  <!-- Strike Row 24850 ATM -->
+  <rect x="100" y="426" width="1000" height="30" fill="#1C2127"/>
+  <text x="120" y="446" class="mono" font-size="12" fill="#F2F3F4">4,120,400</text>
+  <text x="240" y="446" class="mono" font-size="12" font-weight="700" fill="#56D39B">112.20</text>
+  <text x="360" y="446" class="mono" font-size="12" fill="#92989F">13.5%</text>
+  <rect x="490" y="430" width="120" height="22" fill="#252A2F" rx="2"/>
+  <text x="510" y="446" class="mono" font-size="12" font-weight="700" fill="#56D39B">24850 ATM</text>
+  <text x="700" y="446" class="mono" font-size="12" fill="#92989F">13.7%</text>
+  <text x="820" y="446" class="mono" font-size="12" font-weight="700" fill="#E05D52">110.80</text>
+  <text x="960" y="446" class="mono" font-size="12" fill="#F2F3F4">3,892,150</text>
+
+  <!-- Terminal Keycap Bar -->
+  <line x1="100" y1="486" x2="1100" y2="486" stroke="#252A2F"/>
+  <text x="120" y="512" class="mono" font-size="11" fill="#56D39B">F1</text>
+  <text x="140" y="512" class="mono" font-size="11" fill="#92989F">Help</text>
+  <text x="200" y="512" class="mono" font-size="11" fill="#56D39B">F2</text>
+  <text x="220" y="512" class="mono" font-size="11" fill="#92989F">Overview</text>
+  <text x="300" y="512" class="mono" font-size="11" fill="#56D39B">F3</text>
+  <text x="320" y="512" class="mono" font-size="11" fill="#92989F">Chain</text>
+  <text x="390" y="512" class="mono" font-size="11" fill="#56D39B">F4</text>
+  <text x="410" y="512" class="mono" font-size="11" fill="#92989F">Depth</text>
+  <text x="480" y="512" class="mono" font-size="11" fill="#56D39B">F5</text>
+  <text x="500" y="512" class="mono" font-size="11" fill="#92989F">Chart</text>
+  <text x="560" y="512" class="mono" font-size="11" fill="#E69500">:</text>
+  <text x="575" y="512" class="mono" font-size="11" fill="#92989F">Cmd</text>
+  <text x="750" y="512" class="mono" font-size="11" fill="#92989F">Created by Shomay Singh Parihar · @shomay12</text>
 </svg>

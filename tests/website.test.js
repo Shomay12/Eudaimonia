@@ -117,7 +117,8 @@ test("3. HTML Structure, Copy & Semantic Requirements", () => {
   assert.ok(html.includes("https://github.com/shomay12"), "Must link to creator profile https://github.com/shomay12");
 
   // Required Section Copy
-  assert.ok(html.includes("The markets, without the noise."), "Hero headline present");
+  assert.ok(html.includes("The markets,"), "Hero headline part 1 present");
+  assert.ok(html.includes("without the noise."), "Hero headline part 2 present");
   assert.ok(html.includes("Eudaimonia is a keyboard-first market intelligence terminal"), "Hero supporting text present");
   assert.ok(html.includes("Clarity is a competitive advantage."), "Philosophy headline present");
   assert.ok(html.includes("Know what you’re looking at."), "Data transparency headline present");
@@ -133,6 +134,12 @@ test("3. HTML Structure, Copy & Semantic Requirements", () => {
   // Label DEMO DATA
   assert.ok(html.includes("DEMO DATA"), "Must explicitly label demo data");
 
+  // Tactile Components in DOM
+  assert.ok(html.includes("draggable-token"), "Contains draggable instrument token");
+  assert.ok(html.includes("magnetic-wrap"), "Contains magnetic button wrappers");
+  assert.ok(html.includes("interactive-keyboard-box"), "Contains interactive keyboard playground");
+  assert.ok(html.includes("greek-simulator-box"), "Contains interactive Greek sensitivity scrubber");
+
   // Semantic Landmarks
   assert.ok(html.includes("<header"), "Header element present");
   assert.ok(html.includes("<main"), "Main element present");
@@ -140,16 +147,14 @@ test("3. HTML Structure, Copy & Semantic Requirements", () => {
   assert.ok(html.includes("<footer"), "Footer element present");
 });
 
-test("4. CSS Design System Integrity", () => {
+test("4. Light Theme & Tactile Design System Integrity", () => {
   const css = fs.readFileSync(path.join(ROOT_DIR, "styles", "main.css"), "utf-8");
 
-  // Check palette
-  assert.ok(css.includes("#0B0D0F"), "Contains near-black background #0B0D0F");
-  assert.ok(css.includes("#111417"), "Contains secondary background #111417");
-  assert.ok(css.includes("#56D39B"), "Contains restrained accent green #56D39B");
-  assert.ok(css.includes("#F2F3F4"), "Contains primary off-white text #F2F3F4");
-  assert.ok(css.includes("#92989F"), "Contains muted secondary text #92989F");
-  assert.ok(css.includes("#252A2F"), "Contains dark border #252A2F");
+  // Check light theme palette
+  assert.ok(css.includes("#F7F5F0") || css.includes("--bg-paper"), "Contains warm paper background");
+  assert.ok(css.includes("#121417") || css.includes("--text-ink"), "Contains deep ink typography");
+  assert.ok(css.includes("#15803D") || css.includes("--accent-green"), "Contains botanical accent green");
+  assert.ok(css.includes("--shadow-button"), "Contains tactile physical shadow tokens");
 
   // Check Accessibility & Focus
   assert.ok(css.includes(":focus-visible"), "Contains visible focus states");
