@@ -2,13 +2,13 @@
   "name": "Eudaimonia Terminal",
   "short_name": "Eudaimonia",
   "description": "Keyboard-First Market Intelligence and Options Trading Terminal for Indian Financial Markets",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#F7F5F0",
   "theme_color": "#F7F5F0",
   "icons": [
     {
-      "src": "/public/favicon.svg",
+      "src": "public/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
     }
