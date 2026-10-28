@@ -783,13 +783,19 @@ class EudaimoniaWebsiteApp {
 
     const width = container.clientWidth || 720;
     const height = container.clientHeight || 320;
-    const padding = { top: 20, right: 60, bottom: 40, left: 20 };
-    const chartWidth = width - padding.left - padding.right;
-    const chartHeight = height - padding.top - padding.bottom;
+    const isMobile = width < 540;
+    const padding = {
+      top: 15,
+      right: isMobile ? 44 : 60,
+      bottom: 30,
+      left: isMobile ? 10 : 20,
+    };
+    const chartWidth = Math.max(100, width - padding.left - padding.right);
+    const chartHeight = Math.max(150, height - padding.top - padding.bottom);
     const volumeHeight = chartHeight * 0.22;
     const priceHeight = chartHeight - volumeHeight - 15;
 
-    const bars = this.candleBars;
+    const bars = isMobile ? this.candleBars.slice(-20) : this.candleBars;
     if (!bars || bars.length === 0) return;
 
     const minPrice = Math.min(...bars.map((b) => b.low)) - 4;
