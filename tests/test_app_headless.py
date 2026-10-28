@@ -64,6 +64,12 @@ async def test_eudaimonia_app_lifecycle():
         assert app.current_screen_name == "chain"
         assert app.state_engine.active_underlying == "BANKNIFTY"
 
+        # Submit company command
+        await app.on_command_submitted(CommandSubmitted(command="company", args=["TCS"]))
+        assert app.current_screen_name == "company"
+        assert app.company_screen.profile is not None
+        assert app.company_screen.profile.symbol == "NSE:TCS"
+
         # Switch to help screen
         app.action_switch_screen("help")
         assert app.current_screen_name == "help"

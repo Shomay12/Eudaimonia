@@ -58,6 +58,9 @@ class StatusFooter(Widget):
         t.append("F6", style="bold #58a6ff")
         t.append(" Watchlists  ", style="#c9d1d9")
 
+        t.append("F7", style="bold #58a6ff")
+        t.append(" Company  ", style="#c9d1d9")
+
         t.append(":", style="bold #d29922")
         t.append(" Cmd  ", style="#c9d1d9")
 

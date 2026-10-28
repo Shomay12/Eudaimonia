@@ -390,3 +390,217 @@ export function generateMarketDepth(spot = 24852.15) {
   };
 }
 
+
+// --------------------------------------------------------------------------
+// Company Database & Wikipedia Integration
+// --------------------------------------------------------------------------
+
+export const COMPANIES_DATABASE = {
+  RELIANCE: {
+    symbol: "NSE:RELIANCE",
+    companyName: "Reliance Industries Limited",
+    exchange: "NSE / BSE",
+    isin: "INE002A01018",
+    sector: "Energy & Conglomerate",
+    industry: "Oil, Gas, Consumable Fuels, Retail & Telecom",
+    marketCapCr: 2005240,
+    peRatio: 28.4,
+    pbRatio: 2.45,
+    dividendYield: 0.35,
+    week52High: 3217.9,
+    week52Low: 2220.3,
+    headquarters: "Mumbai, Maharashtra, India",
+    foundedYear: 1958,
+    keyExecutives: "Mukesh Ambani (Chairman & MD)",
+    businessSegments: ["Petrochemicals & Refining", "Oil & Gas", "Reliance Retail", "Jio Platforms", "New Energy"],
+    wikiTitle: "Reliance_Industries",
+    fallbackSummary:
+      "Reliance Industries Limited (RIL) is an Indian multinational conglomerate company, headquartered in Mumbai. Its diverse businesses include energy, petrochemicals, natural gas, retail, telecommunications, mass media, and textiles. Reliance is the largest publicly traded company in India by market capitalization and revenue.",
+  },
+  TCS: {
+    symbol: "NSE:TCS",
+    companyName: "Tata Consultancy Services Limited",
+    exchange: "NSE / BSE",
+    isin: "INE467B01029",
+    sector: "Information Technology",
+    industry: "IT Services & Consulting",
+    marketCapCr: 1515000,
+    peRatio: 32.1,
+    pbRatio: 14.8,
+    dividendYield: 1.25,
+    week52High: 4585.9,
+    week52Low: 3313.0,
+    headquarters: "Mumbai, Maharashtra, India",
+    foundedYear: 1968,
+    keyExecutives: "K. Krithivasan (CEO & MD), N. Chandrasekaran (Chairman)",
+    businessSegments: ["BFSI Solutions", "Cloud & Cognitive AI", "Enterprise Engineering", "Healthcare IT"],
+    wikiTitle: "Tata_Consultancy_Services",
+    fallbackSummary:
+      "Tata Consultancy Services (TCS) is an Indian multinational information technology services and consulting company headquartered in Mumbai. It is a part of the Tata Group and operates in 150 locations across 50 countries. TCS is the second-largest Indian company by market capitalization.",
+  },
+  INFY: {
+    symbol: "NSE:INFY",
+    companyName: "Infosys Limited",
+    exchange: "NSE / BSE",
+    isin: "INE009A01021",
+    sector: "Information Technology",
+    industry: "IT Consulting & Software",
+    marketCapCr: 765400,
+    peRatio: 29.8,
+    pbRatio: 8.6,
+    dividendYield: 2.1,
+    week52High: 1975.0,
+    week52Low: 1358.35,
+    headquarters: "Bengaluru, Karnataka, India",
+    foundedYear: 1981,
+    keyExecutives: "Salil Parekh (CEO & MD), Nandan Nilekani (Chairman)",
+    businessSegments: ["Infosys Topaz (Generative AI)", "Infosys Finacle (Banking)", "Digital Cloud", "Enterprise Transformation"],
+    wikiTitle: "Infosys",
+    fallbackSummary:
+      "Infosys Limited is an Indian multinational information technology company providing business consulting, information technology, and outsourcing services. Founded in Pune by seven engineers, it is headquartered in Bengaluru. Infosys was the first Indian company to list on NASDAQ.",
+  },
+  HDFCBANK: {
+    symbol: "NSE:HDFCBANK",
+    companyName: "HDFC Bank Limited",
+    exchange: "NSE / BSE",
+    isin: "INE040A01034",
+    sector: "Financial Services",
+    industry: "Private Banking & Financial Products",
+    marketCapCr: 1285000,
+    peRatio: 19.5,
+    pbRatio: 2.85,
+    dividendYield: 1.15,
+    week52High: 1794.0,
+    week52Low: 1363.55,
+    headquarters: "Mumbai, Maharashtra, India",
+    foundedYear: 1994,
+    keyExecutives: "Sashidhar Jagdishan (CEO & MD)",
+    businessSegments: ["Retail Mortgages", "Wholesale & Corporate Banking", "Treasury & FX", "Payment Cards & Digital Banking"],
+    wikiTitle: "HDFC_Bank",
+    fallbackSummary:
+      "HDFC Bank Limited is an Indian banking and financial services company headquartered in Mumbai. It is India's largest private sector bank by assets and world's tenth-largest bank by market capitalization following its landmark merger with HDFC.",
+  },
+  ICICIBANK: {
+    symbol: "NSE:ICICIBANK",
+    companyName: "ICICI Bank Limited",
+    exchange: "NSE / BSE",
+    isin: "INE090A01021",
+    sector: "Financial Services",
+    industry: "Private Sector Commercial Banking",
+    marketCapCr: 875200,
+    peRatio: 18.2,
+    pbRatio: 3.1,
+    dividendYield: 0.85,
+    week52High: 1300.0,
+    week52Low: 915.0,
+    headquarters: "Mumbai, Maharashtra, India",
+    foundedYear: 1994,
+    keyExecutives: "Sandeep Bakhshi (MD & CEO)",
+    businessSegments: ["Retail Banking", "Commercial Banking", "Wealth Management", "Digital Platforms (iMobile Pay)"],
+    wikiTitle: "ICICI_Bank",
+    fallbackSummary:
+      "ICICI Bank Limited is an Indian multinational bank and financial services company headquartered in Mumbai. It offers a wide range of banking products and financial services for corporate and retail customers through diverse delivery channels.",
+  },
+  TATAMOTORS: {
+    symbol: "NSE:TATAMOTORS",
+    companyName: "Tata Motors Limited",
+    exchange: "NSE / BSE",
+    isin: "INE155A01022",
+    sector: "Automobile",
+    industry: "Commercial & Passenger Vehicles",
+    marketCapCr: 365800,
+    peRatio: 10.5,
+    pbRatio: 3.8,
+    dividendYield: 0.6,
+    week52High: 1179.05,
+    week52Low: 622.0,
+    headquarters: "Mumbai, Maharashtra, India",
+    foundedYear: 1945,
+    keyExecutives: "N. Chandrasekaran (Chairman)",
+    businessSegments: ["Commercial Trucks & Buses", "Passenger Electric Vehicles", "Jaguar Land Rover (JLR)", "Mobility Solutions"],
+    wikiTitle: "Tata_Motors",
+    fallbackSummary:
+      "Tata Motors Limited is an Indian multinational automotive manufacturing company headquartered in Mumbai, part of the Tata Group. It produces passenger cars, trucks, vans, and buses. It owns luxury car brand Jaguar Land Rover and leads India's EV market.",
+  },
+  SBIN: {
+    symbol: "NSE:SBIN",
+    companyName: "State Bank of India",
+    exchange: "NSE / BSE",
+    isin: "INE062A01020",
+    sector: "Financial Services",
+    industry: "Public Sector Commercial Banking",
+    marketCapCr: 735000,
+    peRatio: 11.2,
+    pbRatio: 1.65,
+    dividendYield: 1.7,
+    week52High: 912.0,
+    week52Low: 555.25,
+    headquarters: "Mumbai, Maharashtra, India",
+    foundedYear: 1806,
+    keyExecutives: "C.S. Setty (Chairman)",
+    businessSegments: ["Treasury Operations", "Corporate Banking", "Retail & Digital Banking (YONO)", "International Banking"],
+    wikiTitle: "State_Bank_of_India",
+    fallbackSummary:
+      "State Bank of India (SBI) is an Indian multinational public sector bank and financial services statutory body headquartered in Mumbai. Tracing origins to the Bank of Calcutta in 1806, SBI is the 48th largest bank in the world by total assets.",
+  },
+};
+
+export function searchCompanyKey(query) {
+  if (!query) return null;
+  const q = String(query).trim().toUpperCase().replace(/^(NSE|BSE):/, "");
+
+  if (COMPANIES_DATABASE[q]) return q;
+
+  const aliases = {
+    RELIANCE: "RELIANCE",
+    RIL: "RELIANCE",
+    MUKESH: "RELIANCE",
+    TCS: "TCS",
+    TATA: "TATAMOTORS",
+    "TATA MOTORS": "TATAMOTORS",
+    "TATA CONSULTANCY": "TCS",
+    INFY: "INFY",
+    INFOSYS: "INFY",
+    HDFC: "HDFCBANK",
+    HDFCBANK: "HDFCBANK",
+    ICICI: "ICICIBANK",
+    ICICIBANK: "ICICIBANK",
+    SBI: "SBIN",
+    SBIN: "SBIN",
+    "STATE BANK": "SBIN",
+    JLR: "TATAMOTORS",
+  };
+
+  if (aliases[q]) return aliases[q];
+
+  for (const [key, data] of Object.entries(COMPANIES_DATABASE)) {
+    if (key.includes(q) || data.companyName.toUpperCase().includes(q)) {
+      return key;
+    }
+  }
+
+  for (const [alias, target] of Object.entries(aliases)) {
+    if (alias.includes(q)) return target;
+  }
+
+  return null;
+}
+
+export async function fetchCompanyWikipedia(wikiTitle) {
+  if (!wikiTitle) return null;
+  const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(wikiTitle)}`;
+  try {
+    const res = await fetch(url, { headers: { Accept: "application/json" } });
+    if (res.ok) {
+      const data = await res.json();
+      return {
+        extract: data.extract || "",
+        pageUrl: data.content_urls?.desktop?.page || `https://en.wikipedia.org/wiki/${wikiTitle}`,
+        description: data.description || "",
+      };
+    }
+  } catch (err) {
+    // Graceful offline fallback
+  }
+  return null;
+}

@@ -53,7 +53,7 @@ class WatchlistRepository:
             ]
             for idx, sym in enumerate(default_symbols):
                 await db.execute(
-                    "INSERT INTO watchlist_items (watchlist_id, symbol, sort_order) VALUES (?, ?, ?)",
+                    "INSERT OR IGNORE INTO watchlist_items (watchlist_id, symbol, sort_order) VALUES (?, ?, ?)",
                     (wl_id, sym, idx),
                 )
             await db.commit()

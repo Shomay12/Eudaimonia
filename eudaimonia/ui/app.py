@@ -25,6 +25,7 @@ from eudaimonia.ui.components.header_bar import HeaderBar
 from eudaimonia.ui.components.status_footer import StatusFooter
 from eudaimonia.ui.screens.chart_screen import ChartScreen
 from eudaimonia.ui.screens.chain_screen import OptionsChainScreen
+from eudaimonia.ui.screens.company_screen import CompanyScreen
 from eudaimonia.ui.screens.help_screen import HelpScreen
 from eudaimonia.ui.screens.overview_screen import OverviewScreen
 from eudaimonia.ui.screens.quote_screen import QuoteScreen
@@ -44,6 +45,7 @@ class EudaimoniaApp(App):
         Binding("f4", "switch_screen('quote')", "Quote", show=True),
         Binding("f5", "switch_screen('chart')", "Chart", show=True),
         Binding("f6", "switch_screen('watchlist')", "Watchlists", show=True),
+        Binding("f7", "switch_screen('company')", "Company", show=True),
         Binding("colon", "open_cmd", "Cmd", show=True),
         Binding("slash", "open_cmd", "Cmd", show=False),
         Binding("escape", "handle_escape", "Back/Cancel", show=True),
@@ -89,6 +91,7 @@ class EudaimoniaApp(App):
         self.quote_screen = QuoteScreen(state_engine=self.state_engine)
         self.chart_screen = ChartScreen(state_engine=self.state_engine, provider=self.provider)
         self.watchlist_screen = WatchlistScreen(wl_repo=self.wl_repo)
+        self.company_screen = CompanyScreen(state_engine=self.state_engine)
         self.help_screen = HelpScreen()
 
         self.current_screen_name = "overview"
@@ -98,6 +101,7 @@ class EudaimoniaApp(App):
         self.quote_screen.display = False
         self.chart_screen.display = False
         self.watchlist_screen.display = False
+        self.company_screen.display = False
         self.help_screen.display = False
 
         yield self.header_bar
@@ -106,6 +110,7 @@ class EudaimoniaApp(App):
         yield self.quote_screen
         yield self.chart_screen
         yield self.watchlist_screen
+        yield self.company_screen
         yield self.help_screen
         yield self.cmd_line
         yield self.status_footer
@@ -193,6 +198,7 @@ class EudaimoniaApp(App):
             "quote": self.quote_screen,
             "chart": self.chart_screen,
             "watchlist": self.watchlist_screen,
+            "company": self.company_screen,
             "help": self.help_screen,
         }
         return mapping.get(name)
@@ -277,6 +283,12 @@ class EudaimoniaApp(App):
                 self.state_engine.active_underlying = und
                 self.chain_screen.set_underlying(und)
             self.action_switch_screen("chain")
+
+        elif cmd in ("company", "info", "wiki", "search"):
+            if args:
+                query = " ".join(args)
+                self.company_screen.load_company(query)
+            self.action_switch_screen("company")
 
         elif cmd in ("quote", "depth"):
             if args:

@@ -14,6 +14,8 @@ import {
   generateOptionsChain,
   generateCandleBars,
   generateMarketDepth,
+  COMPANIES_DATABASE,
+  searchCompanyKey,
 } from "../js/terminal-engine.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -164,4 +166,31 @@ test("4. Light Theme & Tactile Design System Integrity", () => {
   // Check Responsive Breakpoints
   assert.ok(css.includes("@media (max-width: 768px)"), "Contains tablet/mobile breakpoint");
   assert.ok(css.includes("@media (max-width: 1024px)"), "Contains desktop/tablet breakpoint");
+});
+
+test("5. Company Intelligence & Wikipedia Search Engine", async (t) => {
+  await t.test("searchCompanyKey resolves symbols and names", () => {
+    assert.strictEqual(searchCompanyKey("RELIANCE"), "RELIANCE");
+    assert.strictEqual(searchCompanyKey("NSE:RELIANCE"), "RELIANCE");
+    assert.strictEqual(searchCompanyKey("TCS"), "TCS");
+    assert.strictEqual(searchCompanyKey("Tata Consultancy"), "TCS");
+    assert.strictEqual(searchCompanyKey("Infosys"), "INFY");
+    assert.strictEqual(searchCompanyKey("HDFC"), "HDFCBANK");
+    assert.strictEqual(searchCompanyKey("Tata Motors"), "TATAMOTORS");
+    assert.strictEqual(searchCompanyKey("SBI"), "SBIN");
+  });
+
+  await t.test("COMPANIES_DATABASE holds verified metadata and Wikipedia titles", () => {
+    const reliance = COMPANIES_DATABASE["RELIANCE"];
+    assert.ok(reliance);
+    assert.strictEqual(reliance.symbol, "NSE:RELIANCE");
+    assert.strictEqual(reliance.wikiTitle, "Reliance_Industries");
+    assert.ok(reliance.fallbackSummary.includes("Reliance"));
+    assert.ok(reliance.marketCapCr > 1000000);
+
+    const tcs = COMPANIES_DATABASE["TCS"];
+    assert.ok(tcs);
+    assert.strictEqual(tcs.symbol, "NSE:TCS");
+    assert.strictEqual(tcs.headquarters.includes("Mumbai"), true);
+  });
 });

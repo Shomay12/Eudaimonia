@@ -229,6 +229,9 @@
                 <button type="button" class="screen-tab" data-screen="overview" role="tab" aria-selected="false" aria-controls="screen-overview">
                   <span class="tab-fkey">F2</span> Market Overview
                 </button>
+                <button type="button" class="screen-tab" data-screen="company" role="tab" aria-selected="false" aria-controls="screen-company">
+                  <span class="tab-fkey">F7</span> Company Profile
+                </button>
                 <button type="button" class="screen-tab" data-screen="help" role="tab" aria-selected="false" aria-controls="screen-help">
                   <span class="tab-fkey">F1</span> Help Manual
                 </button>
@@ -397,6 +400,69 @@
                   </div>
                 </div>
 
+                <!-- SCREEN 6: COMPANY PROFILE & WIKIPEDIA (F7) -->
+                <div id="screen-company" class="terminal-screen" role="tabpanel">
+                  <div class="company-profile-panel" style="padding: 1rem; color: #E2E8F0; font-family: ui-monospace, monospace;">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid #282E36; padding-bottom:0.75rem; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+                      <div>
+                        <div style="font-size:0.75rem; color:#86EFAC; font-weight:700; letter-spacing:1px;">NSE / BSE LISTED COMPANY</div>
+                        <h3 id="comp-name" style="font-size:1.3rem; margin:0.2rem 0; color:#FFF; font-weight:700;">Reliance Industries Limited</h3>
+                        <div style="font-size:0.8rem; color:#92989F;">
+                          Symbol: <span id="comp-symbol" style="color:#60A5FA; font-weight:700;">NSE:RELIANCE</span> |
+                          ISIN: <span id="comp-isin">INE002A01018</span> |
+                          Sector: <span id="comp-sector">Energy &amp; Conglomerate</span>
+                        </div>
+                      </div>
+                      <div style="text-align:right;">
+                        <div style="font-size:0.75rem; color:#92989F;">MARKET PRICE</div>
+                        <div id="comp-ltp" class="feed-val-up font-mono" style="font-size:1.4rem; font-weight:700;">₹2,962.50</div>
+                        <div id="comp-change" class="feed-val-up font-mono" style="font-size:0.8rem;">+12.50 (+0.42%)</div>
+                      </div>
+                    </div>
+
+                    <!-- Key Valuation & Financial Metrics -->
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:0.75rem; margin-bottom:1rem; background:#14171A; padding:0.75rem; border:1px solid #282E36; border-radius:4px;">
+                      <div>
+                        <div style="font-size:0.7rem; color:#92989F;">MARKET CAP</div>
+                        <div id="comp-mcap" style="font-size:0.95rem; font-weight:700; color:#FFF;">₹20,05,240 Cr</div>
+                      </div>
+                      <div>
+                        <div style="font-size:0.7rem; color:#92989F;">P/E RATIO (TTM)</div>
+                        <div id="comp-pe" style="font-size:0.95rem; font-weight:700; color:#FFF;">28.4x</div>
+                      </div>
+                      <div>
+                        <div style="font-size:0.7rem; color:#92989F;">P/B RATIO</div>
+                        <div id="comp-pb" style="font-size:0.95rem; font-weight:700; color:#FFF;">2.45x</div>
+                      </div>
+                      <div>
+                        <div style="font-size:0.7rem; color:#92989F;">DIVIDEND YIELD</div>
+                        <div id="comp-div" style="font-size:0.95rem; font-weight:700; color:#FFF;">0.35%</div>
+                      </div>
+                      <div>
+                        <div style="font-size:0.7rem; color:#92989F;">52W RANGE</div>
+                        <div id="comp-52w" style="font-size:0.85rem; font-weight:700; color:#E2E8F0;">₹2,220.30 – ₹3,217.90</div>
+                      </div>
+                    </div>
+
+                    <!-- Wikipedia Live Intelligence Box -->
+                    <div style="background:#14171A; border:1px solid #282E36; border-radius:4px; padding:0.85rem;">
+                      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #21262D; padding-bottom:0.5rem; margin-bottom:0.6rem;">
+                        <span style="font-size:0.75rem; color:#FCD34D; font-weight:700; letter-spacing:0.5px;">WIKIPEDIA // ABOUT &amp; OPERATIONAL PROFILE</span>
+                        <a id="comp-wiki-link" href="https://en.wikipedia.org/wiki/Reliance_Industries" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem; color:#60A5FA; text-decoration:none;">Open Article &nearr;</a>
+                      </div>
+                      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:0.5rem; font-size:0.76rem; color:#92989F; margin-bottom:0.65rem;">
+                        <div>Headquarters: <strong id="comp-hq" style="color:#FFF;">Mumbai, Maharashtra, India</strong></div>
+                        <div>Founded: <strong id="comp-founded" style="color:#FFF;">1958</strong></div>
+                        <div style="grid-column:1 / -1;">Leadership: <strong id="comp-execs" style="color:#FFF;">Mukesh Ambani (Chairman &amp; MD)</strong></div>
+                        <div style="grid-column:1 / -1;">Core Business: <strong id="comp-segments" style="color:#FFF;">Petrochemicals &amp; Refining, Retail, Jio Platforms</strong></div>
+                      </div>
+                      <p id="comp-wiki-text" style="font-size:0.8rem; line-height:1.45; color:#CBD5E1; margin:0;">
+                        Reliance Industries Limited is an Indian multinational conglomerate company, headquartered in Mumbai. Its diverse businesses include energy, petrochemicals, natural gas, retail, telecommunications, mass media, and textiles.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- SCREEN 5: HELP SCREEN (F1) -->
                 <div id="screen-help" class="terminal-screen" role="tabpanel">
                   <div class="code-console-panel" style="box-shadow:none; border:none;">
@@ -412,6 +478,7 @@ Target Markets: National Stock Exchange (NSE) &amp; Bombay Stock Exchange (BSE)
   F4        Detailed Quote &amp; Level-2 5-Depth Order Book
   F5        Candlestick Chart (OHLC, Volume, VWAP, Crosshair)
   F6        Watchlists Management Screen
+  F7        Company Profile &amp; Wikipedia Intelligence Screen
   : or /    Open Vim-style interactive command line bar
   ESC       Close command bar or return to previous screen
   q         Quit application

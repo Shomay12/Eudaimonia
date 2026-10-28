@@ -17,6 +17,9 @@ import {
   generateCandleBars,
   generateMarketDepth,
   calculateGreeks,
+  COMPANIES_DATABASE,
+  searchCompanyKey,
+  fetchCompanyWikipedia,
 } from "./terminal-engine.js";
 
 export const CREATOR_CONFIG = {
@@ -45,6 +48,7 @@ class EudaimoniaWebsiteApp {
     this.setupGreekSimulator();
     this.setupCodeBlockCopy();
     this.renderAllScreens();
+    this.renderCompanyProfile("RELIANCE");
     this.startClock();
   }
 
@@ -169,10 +173,11 @@ class EudaimoniaWebsiteApp {
   // ------------------------------------------------------------------------
   setupKeyboardPlayground() {
     const searchInput = document.querySelector("#playground-search-input");
-    const rows = document.querySelectorAll(".instrument-row");
+    const listContainer = document.querySelector(".instrument-select-list");
+    let rows = document.querySelectorAll(".instrument-row");
     let activeIdx = 0;
 
-    if (!searchInput || rows.length === 0) return;
+    if (!searchInput) return;
 
     const setActive = (idx) => {
       rows.forEach((r, i) => {
@@ -187,34 +192,124 @@ class EudaimoniaWebsiteApp {
       activeIdx = idx;
     };
 
-    rows.forEach((row, i) => {
-      row.addEventListener("click", () => {
-        setActive(i);
-        const sym = row.dataset.symbol;
-        if (sym) {
-          this.loadInstrumentIntoTerminal(sym);
-        }
+    const rebindRows = () => {
+      rows = document.querySelectorAll(".instrument-row");
+      activeIdx = 0;
+      rows.forEach((row, i) => {
+        row.addEventListener("click", () => {
+          setActive(i);
+          const sym = row.dataset.symbol;
+          if (sym) {
+            this.loadInstrumentIntoTerminal(sym);
+            const feedback = document.querySelector("#playground-status-msg");
+            if (feedback) {
+              feedback.textContent = `[LOADED] ${sym} dispatched to Terminal`;
+            }
+          }
+        });
       });
+    };
+
+    rebindRows();
+
+    searchInput.addEventListener("input", (e) => {
+      const q = e.target.value.trim().toUpperCase();
+      if (!listContainer) return;
+
+      if (!q) {
+        listContainer.innerHTML = `
+          <div class="instrument-row active" data-symbol="NIFTY" role="option" aria-selected="true">
+            <span class="font-bold">NSE:NIFTY 50</span>
+            <span class="text-secondary">Spot: 24,852.15 [INDEX]</span>
+          </div>
+          <div class="instrument-row" data-symbol="BANKNIFTY" role="option" aria-selected="false">
+            <span class="font-bold">NSE:BANKNIFTY</span>
+            <span class="text-secondary">Spot: 51,920.80 [INDEX]</span>
+          </div>
+          <div class="instrument-row" data-symbol="RELIANCE" role="option" aria-selected="false">
+            <span class="font-bold">NSE:RELIANCE</span>
+            <span class="text-secondary">LTP: 2,962.50 [EQUITY / WIKI]</span>
+          </div>
+          <div class="instrument-row" data-symbol="TCS" role="option" aria-selected="false">
+            <span class="font-bold">NSE:TCS</span>
+            <span class="text-secondary">LTP: 4,185.00 [EQUITY / WIKI]</span>
+          </div>
+          <div class="instrument-row" data-symbol="HDFCBANK" role="option" aria-selected="false">
+            <span class="font-bold">NSE:HDFCBANK</span>
+            <span class="text-secondary">LTP: 1,692.10 [EQUITY / WIKI]</span>
+          </div>
+        `;
+        rebindRows();
+        return;
+      }
+
+      const results = [];
+      if ("NIFTY".includes(q)) results.push({ sym: "NIFTY", name: "NSE:NIFTY 50", meta: "Spot: 24,852.15 [INDEX]" });
+      if ("BANKNIFTY".includes(q)) results.push({ sym: "BANKNIFTY", name: "NSE:BANKNIFTY", meta: "Spot: 51,920.80 [INDEX]" });
+      if ("FINNIFTY".includes(q)) results.push({ sym: "FINNIFTY", name: "NSE:FINNIFTY", meta: "Spot: 24,115.50 [INDEX]" });
+
+      for (const [key, comp] of Object.entries(COMPANIES_DATABASE)) {
+        if (key.includes(q) || comp.companyName.toUpperCase().includes(q)) {
+          results.push({
+            sym: key,
+            name: comp.symbol,
+            meta: `${comp.companyName} [EQUITY / WIKI]`,
+          });
+        }
+      }
+
+      if (results.length > 0) {
+        listContainer.innerHTML = results
+          .map(
+            (r, i) => `
+          <div class="instrument-row ${i === 0 ? "active" : ""}" data-symbol="${r.sym}" role="option" aria-selected="${i === 0 ? "true" : "false"}">
+            <span class="font-bold">${r.name}</span>
+            <span class="text-secondary" style="font-size:0.75rem;">${r.meta}</span>
+          </div>
+        `
+          )
+          .join("");
+      } else {
+        listContainer.innerHTML = `
+          <div style="padding:0.75rem; color:#92989F; font-size:0.8rem;" class="mono">
+            Press Enter to query Wikipedia for "${e.target.value}".
+          </div>
+        `;
+      }
+      rebindRows();
     });
 
     searchInput.addEventListener("keydown", (e) => {
       if (e.key === "ArrowDown") {
         e.preventDefault();
-        const next = (activeIdx + 1) % rows.length;
-        setActive(next);
+        if (rows.length > 0) {
+          const next = (activeIdx + 1) % rows.length;
+          setActive(next);
+        }
       } else if (e.key === "ArrowUp") {
         e.preventDefault();
-        const prev = (activeIdx - 1 + rows.length) % rows.length;
-        setActive(prev);
+        if (rows.length > 0) {
+          const prev = (activeIdx - 1 + rows.length) % rows.length;
+          setActive(prev);
+        }
       } else if (e.key === "Enter") {
         e.preventDefault();
         const selected = rows[activeIdx];
-        if (selected) {
+        if (selected && selected.dataset.symbol) {
           const sym = selected.dataset.symbol;
           this.loadInstrumentIntoTerminal(sym);
           const feedback = document.querySelector("#playground-status-msg");
           if (feedback) {
-            feedback.textContent = `[LOADED] ${sym} dispatched to Terminal Chain`;
+            feedback.textContent = `[LOADED] ${sym} loaded into Terminal`;
+          }
+        } else if (searchInput.value.trim()) {
+          // Direct search query
+          const q = searchInput.value.trim();
+          this.renderCompanyProfile(q);
+          this.switchScreen("company");
+          const feedback = document.querySelector("#playground-status-msg");
+          if (feedback) {
+            feedback.textContent = `[FETCHED] ${q} Wikipedia intelligence opened in Terminal (F7)`;
           }
         }
       }
@@ -223,12 +318,9 @@ class EudaimoniaWebsiteApp {
     // Global shortcut to focus playground search when '/' is pressed outside an input
     window.addEventListener("keydown", (e) => {
       if (e.key === "/" && document.activeElement !== searchInput && document.activeElement.id !== "cmd-input-field") {
-        const playgroundBox = document.querySelector(".interactive-keyboard-box");
-        if (playgroundBox) {
-          // If in viewport or user pressed slash, focus it
-          e.preventDefault();
-          searchInput.focus();
-        }
+        e.preventDefault();
+        searchInput.focus();
+        searchInput.select();
       }
     });
   }
@@ -240,10 +332,15 @@ class EudaimoniaWebsiteApp {
       this.renderOptionsChain();
       this.switchScreen("chain");
     } else {
-      this.switchScreen("depth");
+      this.renderCompanyProfile(sym);
+      this.switchScreen("company");
     }
 
     const targetLabel = document.querySelector("#footer-active-target");
+    if (targetLabel) {
+      targetLabel.textContent = sym;
+    }
+  }
     if (targetLabel) {
       targetLabel.textContent = sym;
     }
@@ -410,6 +507,10 @@ class EudaimoniaWebsiteApp {
           e.preventDefault();
           this.switchScreen("overview");
           break;
+        case "F7":
+          e.preventDefault();
+          this.switchScreen("company");
+          break;
         case ":":
           e.preventDefault();
           this.openCommandLine();
@@ -488,7 +589,7 @@ class EudaimoniaWebsiteApp {
         cmdFeedback.textContent = "Type 'help' to see all commands. Press ESC to close.";
         return;
       }
-      const known = ["chain", "chart", "depth", "overview", "help", "status", "watch", "unwatch", "quit"];
+      const known = ["chain", "chart", "depth", "quote", "company", "info", "wiki", "search", "overview", "help", "status", "watch", "unwatch", "quit"];
       const matches = known.filter((cmd) => cmd.startsWith(val.split(" ")[0]));
       if (matches.length > 0) {
         cmdFeedback.textContent = `Matches: ${matches.join(", ")}`;
@@ -553,6 +654,10 @@ class EudaimoniaWebsiteApp {
       this.switchScreen("chart");
     } else if (cmd === "depth" || cmd === "quote") {
       this.switchScreen("depth");
+    } else if (cmd === "company" || cmd === "info" || cmd === "wiki" || cmd === "search") {
+      const q = parts.slice(1).join(" ") || "RELIANCE";
+      this.renderCompanyProfile(q);
+      this.switchScreen("company");
     } else if (cmd === "overview") {
       this.switchScreen("overview");
     } else if (cmd === "help") {
@@ -791,6 +896,63 @@ class EudaimoniaWebsiteApp {
       `;
       container.appendChild(card);
     });
+  }
+
+  async renderCompanyProfile(query = "RELIANCE") {
+    const key = searchCompanyKey(query) || "RELIANCE";
+    const comp = COMPANIES_DATABASE[key];
+    if (!comp) return;
+
+    const nameEl = document.querySelector("#comp-name");
+    const symEl = document.querySelector("#comp-symbol");
+    const isinEl = document.querySelector("#comp-isin");
+    const sectorEl = document.querySelector("#comp-sector");
+    const ltpEl = document.querySelector("#comp-ltp");
+    const chgEl = document.querySelector("#comp-change");
+    const mcapEl = document.querySelector("#comp-mcap");
+    const peEl = document.querySelector("#comp-pe");
+    const pbEl = document.querySelector("#comp-pb");
+    const divEl = document.querySelector("#comp-div");
+    const range52wEl = document.querySelector("#comp-52w");
+    const hqEl = document.querySelector("#comp-hq");
+    const foundedEl = document.querySelector("#comp-founded");
+    const execsEl = document.querySelector("#comp-execs");
+    const segmentsEl = document.querySelector("#comp-segments");
+    const wikiTextEl = document.querySelector("#comp-wiki-text");
+    const wikiLinkEl = document.querySelector("#comp-wiki-link");
+
+    if (nameEl) nameEl.textContent = comp.companyName;
+    if (symEl) symEl.textContent = comp.symbol;
+    if (isinEl) isinEl.textContent = comp.isin;
+    if (sectorEl) sectorEl.textContent = `${comp.sector} (${comp.industry})`;
+    if (mcapEl) mcapEl.textContent = `₹${comp.marketCapCr.toLocaleString("en-IN")} Cr`;
+    if (peEl) peEl.textContent = `${comp.peRatio}x`;
+    if (pbEl) pbEl.textContent = `${comp.pbRatio}x`;
+    if (divEl) divEl.textContent = `${comp.dividendYield}%`;
+    if (range52wEl) range52wEl.textContent = `₹${comp.week52Low.toFixed(2)} – ₹${comp.week52High.toFixed(2)}`;
+    if (hqEl) hqEl.textContent = comp.headquarters;
+    if (foundedEl) foundedEl.textContent = comp.foundedYear;
+    if (execsEl) execsEl.textContent = comp.keyExecutives;
+    if (segmentsEl) segmentsEl.textContent = comp.businessSegments.join(", ");
+
+    if (wikiTextEl) wikiTextEl.textContent = comp.fallbackSummary;
+    if (wikiLinkEl) {
+      wikiLinkEl.href = `https://en.wikipedia.org/wiki/${comp.wikiTitle}`;
+      wikiLinkEl.textContent = "Open Wikipedia Article ↗";
+    }
+
+    // Try fetching live Wikipedia summary
+    try {
+      const wikiData = await fetchCompanyWikipedia(comp.wikiTitle);
+      if (wikiData && wikiData.extract && wikiTextEl) {
+        wikiTextEl.textContent = wikiData.extract;
+        if (wikiLinkEl && wikiData.pageUrl) {
+          wikiLinkEl.href = wikiData.pageUrl;
+        }
+      }
+    } catch (e) {
+      // Retain fallback summary
+    }
   }
 
   startClock() {

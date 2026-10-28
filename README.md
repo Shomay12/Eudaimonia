@@ -12,7 +12,7 @@
 [![Python Version](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-3776ab?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![UI Framework](https://img.shields.io/badge/UI-Textual%20%26%20Rich-00d4aa?style=for-the-badge)](https://textual.textualize.io/)
 [![Market Coverage](https://img.shields.io/badge/Markets-NSE%20%26%20BSE%20India-e3b341?style=for-the-badge)](https://www.nseindia.com/)
-[![Tests](https://img.shields.io/badge/Tests-24%20Passing-3fb950?style=for-the-badge&logo=pytest&logoColor=white)](TESTING.md)
+[![Tests](https://img.shields.io/badge/Tests-27%20Py%20%7C%2014%20JS%20Passing-3fb950?style=for-the-badge&logo=pytest&logoColor=white)](TESTING.md)
 [![License](https://img.shields.io/badge/License-MIT-8b949e?style=for-the-badge)](LICENSE)
 
 [Key Features](#-key-features) •
@@ -51,6 +51,10 @@ Built entirely with Python 3.11+, **Textual**, and **Rich**, it connects to Indi
   - **Index Benchmarks**: NIFTY 50, BANKNIFTY, FINNIFTY, BSE SENSEX, BSE BANKEX.
   - **Cash Equities**: Reliance, TCS, Infosys, HDFC Bank, ICICI Bank, State Bank of India, Tata Motors, etc.
   - **F&O Derivatives Ladder**: Complete weekly and monthly Call (`CE`) and Put (`PE`) options contracts dynamically centered around At-The-Money (ATM).
+- **🏢 Company Intelligence & Live Wikipedia Integration**:
+  - Search any listed company by brand or corporate name (e.g. *Reliance*, *Tata Motors*, *Infosys*, *HDFC*, *SBI*, *TCS*) or symbol.
+  - Instant fundamental intelligence: Market Capitalization, Trailing P/E, P/B, Dividend Yield, 52-Week Range, LTP, and Net Change.
+  - Direct connection to **Wikipedia REST API**: dynamically fetches company history, "About" overview, headquarters, founding year, key leadership/CEOs, and core business segments with offline fallback resilience.
 - **📐 Mathematical Options Analytics & Greeks**:
   - Analytical Black-Scholes-Merton Greek calculations ($\Delta$, $\Gamma$, $\Theta$, $\mathcal{V}$, $\rho$).
   - High-precision Implied Volatility (IV) solver using **Brent's method** (`scipy.optimize.brentq`) with theoretical no-arbitrage boundary checks.
@@ -151,6 +155,35 @@ ORDERS      QTY         BID PRICE          ASK PRICE   QTY         ORDERS
 TOTAL       6,750                          10,250      TOTAL
 ```
 
+### 5. Company Intelligence & Wikipedia Profile (`F7`)
+Search any company by name or symbol to review valuation metrics alongside live Wikipedia articles:
+
+```text
+COMPANY INTELLIGENCE // RELIANCE INDUSTRIES LIMITED
+SYMBOL: NSE:RELIANCE  |  EXCHANGE: NSE / BSE  |  ISIN: INE002A01018
+SECTOR: Energy & Conglomerate  |  INDUSTRY: Oil, Gas, Consumable Fuels, Retail & Telecom
+──────────────────────────────────────────────────────────────────────────────────────────
+KEY MARKET & VALUATION METRICS
+  Current LTP: ₹2,962.50  Change: +12.50 (+0.42%)  Day Volume: 1,240,500
+  Market Capitalization : ₹20,05,240 Cr
+  P/E Ratio (Trailing)  : 28.4x            |  P/B Ratio: 2.45x
+  Dividend Yield        : 0.35%            |  52-Week Range: ₹2,220.30 – ₹3,217.90
+
+WIKIPEDIA // ABOUT & OPERATIONAL PROFILE
+  Headquarters : Mumbai, Maharashtra, India
+  Founded Year : 1958                      |  Leadership: Mukesh Ambani (Chairman & MD)
+  Core Business: Petrochemicals & Refining, Oil & Gas, Retail, Jio Platforms, New Energy
+
+  Overview:
+  Reliance Industries Limited (RIL) is an Indian multinational conglomerate company,
+  headquartered in Mumbai. Its diverse businesses include energy, petrochemicals, natural
+  gas, retail, telecommunications, mass media, and textiles. Reliance is the largest
+  publicly traded company in India by market capitalization and revenue.
+
+  Wikipedia Reference: https://en.wikipedia.org/wiki/Reliance_Industries
+  Press 'c' for Chart | 'o' for Options Chain | 'F4' for Order Book | ESC to return
+```
+
 ---
 
 ## ⚡ Quickstart in 60 Seconds
@@ -207,6 +240,7 @@ Eudaimonia is engineered for zero mouse friction:
 | <kbd>F4</kbd> | Global | Switch to **Quote & 5-Depth Order Book Screen** |
 | <kbd>F5</kbd> | Global | Switch to **Candlestick Chart Screen** |
 | <kbd>F6</kbd> | Global | Switch to **Watchlists Management Screen** |
+| <kbd>F7</kbd> | Global | Switch to **Company Profile & Wikipedia Screen** |
 | <kbd>:</kbd> or <kbd>/</kbd> | Global | Open interactive **Command Line Prompt** |
 | <kbd>ESC</kbd> | Global | Dismiss Command Line / Return to Overview Screen |
 | <kbd>q</kbd> | Global | Quit Eudaimonia |
@@ -235,6 +269,9 @@ Press <kbd>:</kbd> or <kbd>/</kbd> from any screen to open the bottom command pr
 | `watchlist`| — | `watchlist` | Open watchlist management screen |
 | `depth` | `<SYMBOL>` | `depth NSE:BANKNIFTY` | Inspect Level-2 order book depth |
 | `greeks` | `[UNDERLYING]` | `greeks FINNIFTY` | Focus options chain on analytical Greeks |
+| `company`| `<NAME>` | `company RELIANCE` | Open Company Intelligence & live Wikipedia profile |
+| `info` | `<NAME>` | `info TCS` | Alias for `company` data and Wikipedia summary |
+| `search` | `<QUERY>` | `search Tata Motors` | Search listed company and open profile |
 | `status` | — | `status` | Display feed health, connection state, and latency |
 | `help` | — | `help` | Display manual and keyboard reference |
 | `quit` | — | `quit` | Gracefully exit application |
@@ -337,7 +374,7 @@ Eudaimonia supports live data feeds from Indian brokers while preserving complet
 
 ## 🧪 Automated Test Suite
 
-Eudaimonia is tested with **24 deterministic unit and integration tests** verifying mathematical formulas, data quality triggers, and headless UI screen switching:
+Eudaimonia is tested with **27 deterministic Python tests** and **14 Node.js tests** verifying mathematical formulas, data quality triggers, company search, Wikipedia integration, and headless UI screen switching:
 
 ```bash
 # Execute full test suite
@@ -359,22 +396,25 @@ tests/test_app_headless.py::test_eudaimonia_app_lifecycle PASSED         [ 29%]
 tests/test_candle_engine.py::test_candle_aggregation_and_vwap PASSED     [ 33%]
 tests/test_candle_engine.py::test_candle_engine_multi_timeframe PASSED   [ 37%]
 tests/test_commands.py::test_cli_argument_parsing PASSED                 [ 41%]
-tests/test_commands.py::test_command_line_known_commands PASSED          [ 45%]
-tests/test_data_quality.py::test_non_positive_price_detection PASSED     [ 50%]
-tests/test_data_quality.py::test_sequence_gap_and_duplicate_detection PASSED [ 54%]
-tests/test_data_quality.py::test_out_of_order_timestamp_detection PASSED [ 58%]
-tests/test_data_quality.py::test_staleness_detection PASSED              [ 62%]
-tests/test_implied_vol.py::test_iv_solver_convergence PASSED             [ 66%]
-tests/test_implied_vol.py::test_iv_solver_arbitrage_violation PASSED     [ 70%]
-tests/test_instrument_master.py::test_instrument_master_indexing PASSED  [ 75%]
-tests/test_mock_provider.py::test_mock_provider_lifecycle PASSED         [ 79%]
-tests/test_models.py::test_instrument_model PASSED                       [ 83%]
-tests/test_models.py::test_market_tick_calculations PASSED               [ 87%]
-tests/test_models.py::test_market_depth_totals PASSED                    [ 91%]
-tests/test_storage.py::test_watchlist_repository PASSED                  [ 95%]
-tests/test_storage.py::test_preferences_repository PASSED                [100%]
+tests/test_commands.py::test_command_line_known_commands PASSED          [ 40%]
+tests/test_company_info.py::test_company_key_lookup PASSED               [ 44%]
+tests/test_company_info.py::test_company_profile_data PASSED             [ 48%]
+tests/test_company_info.py::test_nonexistent_company PASSED              [ 51%]
+tests/test_data_quality.py::test_non_positive_price_detection PASSED     [ 55%]
+tests/test_data_quality.py::test_sequence_gap_and_duplicate_detection PASSED [ 59%]
+tests/test_data_quality.py::test_out_of_order_timestamp_detection PASSED [ 62%]
+tests/test_data_quality.py::test_staleness_detection PASSED              [ 66%]
+tests/test_implied_vol.py::test_iv_solver_convergence PASSED             [ 70%]
+tests/test_implied_vol.py::test_iv_solver_arbitrage_violation PASSED     [ 74%]
+tests/test_instrument_master.py::test_instrument_master_indexing PASSED  [ 77%]
+tests/test_mock_provider.py::test_mock_provider_lifecycle PASSED         [ 81%]
+tests/test_models.py::test_instrument_model PASSED                       [ 85%]
+tests/test_models.py::test_market_tick_calculations PASSED               [ 88%]
+tests/test_models.py::test_market_depth_totals PASSED                    [ 92%]
+tests/test_storage.py::test_watchlist_repository PASSED                  [ 96%]
+tests/test_preferences_repository PASSED                [100%]
 
-============================== 24 passed in 2.80s ==============================
+============================== 27 passed in 3.14s ==============================
 ```
 
 ---
