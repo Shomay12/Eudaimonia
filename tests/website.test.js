@@ -115,6 +115,7 @@ test("3. HTML Structure, Copy & Semantic Requirements", () => {
   assert.ok(html.includes("Shomay Singh Parihar"), "Must attribute creator Shomay Singh Parihar");
   assert.ok(html.includes("@shomay12"), "Must include creator handle @shomay12");
   assert.ok(html.includes("https://github.com/shomay12"), "Must link to creator profile https://github.com/shomay12");
+  assert.ok(html.includes("shomaysinghparihar.online"), "Must link to personal website shomaysinghparihar.online");
 
   // Required Section Copy
   assert.ok(html.includes("The markets,"), "Hero headline part 1 present");

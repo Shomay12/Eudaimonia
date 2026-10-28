@@ -23,7 +23,7 @@ export const CREATOR_CONFIG = {
   name: "Shomay Singh Parihar",
   handle: "@shomay12",
   githubUrl: "https://github.com/shomay12",
-  personalWebsiteUrl: null, // Configurable: keep null until verified domain is provided
+  personalWebsiteUrl: "https://shomaysinghparihar.online",
 };
 
 class EudaimoniaWebsiteApp {

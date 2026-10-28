@@ -45,6 +45,7 @@ report(html.includes("Eudaimonia"), "Product name 'Eudaimonia' present and prope
 report(html.includes("Shomay Singh Parihar"), "Creator 'Shomay Singh Parihar' explicitly credited");
 report(html.includes("@shomay12"), "@shomay12 username credited");
 report(html.includes("https://github.com/shomay12"), "Verified GitHub profile URL linked");
+report(html.includes("shomaysinghparihar.online"), "Personal website URL 'shomaysinghparihar.online' credited");
 
 // 5. Check Section Headlines
 const hasHeroHeadline = /The markets,[\s\S]*?without the noise\./i.test(html);
