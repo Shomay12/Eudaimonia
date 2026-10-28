@@ -109,6 +109,7 @@ test("2. Candle Engine & Market Depth Generators", async (t) => {
 
 test("3. HTML Structure, Copy & Semantic Requirements", () => {
   const html = fs.readFileSync(path.join(ROOT_DIR, "index.html"), "utf-8");
+  const meHtml = fs.readFileSync(path.join(ROOT_DIR, "me.html"), "utf-8");
 
   // Product name
   assert.ok(html.includes("Eudaimonia"), "Must contain product name Eudaimonia");
@@ -118,6 +119,13 @@ test("3. HTML Structure, Copy & Semantic Requirements", () => {
   assert.ok(html.includes("@shomay12"), "Must include creator handle @shomay12");
   assert.ok(html.includes("https://github.com/shomay12"), "Must link to creator profile https://github.com/shomay12");
   assert.ok(html.includes("shomaysinghparihar.online"), "Must link to personal website shomaysinghparihar.online");
+  assert.ok(html.includes("me.html"), "Must link to me.html (About Me dossier page)");
+
+  // Me Page Verification
+  assert.ok(meHtml.includes("Shomay Singh Parihar"), "me.html must credit Shomay Singh Parihar");
+  assert.ok(meHtml.includes("shomaysinghparihar.online"), "me.html must feature shomaysinghparihar.online");
+  assert.ok(meHtml.includes("@shomay12"), "me.html must feature GitHub handle @shomay12");
+  assert.ok(meHtml.includes("Eudaimonia"), "me.html must link back to Eudaimonia");
 
   // Required Section Copy
   assert.ok(html.includes("The markets,"), "Hero headline part 1 present");
@@ -131,8 +139,10 @@ test("3. HTML Structure, Copy & Semantic Requirements", () => {
 
   // Absolute Design Restrictions
   assert.ok(!html.includes('href="#"'), "Must not contain placeholder href='#' links");
+  assert.ok(!meHtml.includes('href="#"'), "me.html must not contain placeholder href='#' links");
   const emojiRegex = /[\u{1F300}-\u{1F5FF}\u{1F600}-\u{1F64F}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F900}-\u{1F9FF}\u{1F018}-\u{1F270}]/u;
   assert.ok(!emojiRegex.test(html), "Must not contain emojis");
+  assert.ok(!emojiRegex.test(meHtml), "me.html must not contain emojis");
 
   // Label DEMO DATA
   assert.ok(html.includes("DEMO DATA"), "Must explicitly label demo data");
@@ -163,9 +173,10 @@ test("4. Light Theme & Tactile Design System Integrity", () => {
   assert.ok(css.includes(":focus-visible"), "Contains visible focus states");
   assert.ok(css.includes("prefers-reduced-motion"), "Contains prefers-reduced-motion media query");
 
-  // Check Responsive Breakpoints
-  assert.ok(css.includes("@media (max-width: 768px)"), "Contains tablet/mobile breakpoint");
-  assert.ok(css.includes("@media (max-width: 1024px)"), "Contains desktop/tablet breakpoint");
+  // Check Responsive Breakpoints for Mobile and Laptop
+  assert.ok(css.includes("@media (max-width: 768px)"), "Contains mobile breakpoint <= 768px");
+  assert.ok(css.includes("@media (min-width: 1024px) and (max-width: 1440px)"), "Contains laptop breakpoint 1024px-1440px");
+  assert.ok(css.includes("@media (max-width: 1024px)"), "Contains tablet/laptop breakpoint");
 });
 
 test("5. Company Intelligence & Wikipedia Search Engine", async (t) => {

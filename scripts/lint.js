@@ -24,11 +24,19 @@ function report(condition, message) {
 
 console.log("--- Eudaimonia Website Quality & Lint Check ---");
 
-// 1. Read index.html
+// 1. Read index.html and me.html
 const indexPath = path.join(ROOT_DIR, "index.html");
 report(fs.existsSync(indexPath), "index.html exists");
 
+const mePath = path.join(ROOT_DIR, "me.html");
+report(fs.existsSync(mePath), "me.html (About Me / Creator dossier) exists");
+
 const html = fs.readFileSync(indexPath, "utf-8");
+const meHtml = fs.readFileSync(mePath, "utf-8");
+
+report(!/href=["']#["']/i.test(meHtml), "No placeholder href='#' in me.html");
+report(meHtml.includes("shomaysinghparihar.online"), "me.html links to shomaysinghparihar.online");
+report(meHtml.includes("Shomay Singh Parihar"), "me.html credits Shomay Singh Parihar");
 
 // 2. Check no href="#"
 const hasHashPlaceholder = /href=["']#["']/i.test(html);

@@ -14,6 +14,7 @@ console.log("[Build] Verifying Eudaimonia website assets...");
 
 const requiredFiles = [
   "index.html",
+  "me.html",
   "styles/main.css",
   "js/app.js",
   "js/terminal-engine.js",
