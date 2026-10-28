@@ -50,6 +50,8 @@ class EudaimoniaWebsiteApp {
     this.renderAllScreens();
     this.renderCompanyProfile("RELIANCE");
     this.startClock();
+    this.setupLiveMarketTicks();
+    this.setupResizeListener();
   }
 
   // ------------------------------------------------------------------------
@@ -78,48 +80,74 @@ class EudaimoniaWebsiteApp {
   }
 
   // ------------------------------------------------------------------------
-  // Tactile Interactions: Magnetic Buttons & 3D Cursor Tilt
+  // Restrained Institutional Interactions
   // ------------------------------------------------------------------------
   setupTactileInteractions() {
-    // Check prefers-reduced-motion
+    // Keep chassis solid and flat without distracting 3D mouse tilt
+    const chassis = document.querySelector(".terminal-chassis");
+    if (chassis) {
+      chassis.style.transform = "none";
+    }
+
+    // Keep buttons stable and click-responsive
+    const magneticElements = document.querySelectorAll(".magnetic-wrap");
+    magneticElements.forEach((wrap) => {
+      wrap.style.transform = "none";
+    });
+  }
+
+  // ------------------------------------------------------------------------
+  // Live Market Data Tick Highlights (Authentic Terminal Animation)
+  // ------------------------------------------------------------------------
+  setupLiveMarketTicks() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
 
-    // 1. Magnetic Buttons
-    const magneticElements = document.querySelectorAll(".magnetic-wrap");
-    magneticElements.forEach((wrap) => {
-      wrap.addEventListener("mousemove", (e) => {
-        const rect = wrap.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const deltaX = (e.clientX - centerX) * 0.22;
-        const deltaY = (e.clientY - centerY) * 0.22;
-        wrap.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-      });
+    const niftyFeedEl = document.querySelector(".feed-val-up");
+    const spotEl = document.querySelector("#chain-spot-price");
 
-      wrap.addEventListener("mouseleave", () => {
-        wrap.style.transform = "translate(0px, 0px)";
-      });
+    setInterval(() => {
+      if (!niftyFeedEl) return;
+      const isUp = Math.random() > 0.46;
+      const delta = parseFloat(((Math.random() * 1.75 + 0.15) * (isUp ? 1 : -1)).toFixed(2));
+      const currentVal = this.state.indices.NIFTY ? this.state.indices.NIFTY.ltp : 24852.15;
+      const newVal = parseFloat((currentVal + delta).toFixed(2));
+
+      if (this.state.indices.NIFTY) {
+        this.state.indices.NIFTY.ltp = newVal;
+        this.state.indices.NIFTY.change = parseFloat((this.state.indices.NIFTY.change + delta).toFixed(2));
+        const prevClose = newVal - this.state.indices.NIFTY.change;
+        this.state.indices.NIFTY.pctChange = parseFloat(((this.state.indices.NIFTY.change / prevClose) * 100).toFixed(2));
+      }
+
+      const sign = this.state.indices.NIFTY && this.state.indices.NIFTY.change >= 0 ? "+" : "";
+      const text = `${newVal.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${sign}${this.state.indices.NIFTY ? this.state.indices.NIFTY.change.toFixed(2) : delta.toFixed(2)} (${sign}${this.state.indices.NIFTY ? this.state.indices.NIFTY.pctChange.toFixed(2) : "0.00"}%)`;
+
+      niftyFeedEl.textContent = text;
+      niftyFeedEl.classList.remove("tick-up", "tick-down");
+      void niftyFeedEl.offsetWidth; // force reflow
+      niftyFeedEl.classList.add(isUp ? "tick-up" : "tick-down");
+
+      if (spotEl && this.state.activeUnderlying === "NIFTY") {
+        spotEl.textContent = newVal.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+    }, 3200);
+  }
+
+  // ------------------------------------------------------------------------
+  // Responsive Screen Resize Listener
+  // ------------------------------------------------------------------------
+  setupResizeListener() {
+    let resizeTimer = null;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        if (this.state.activeScreen === "chart") {
+          this.renderCandlestickChart();
+        }
+      }, 150);
     });
-
-    // 2. 3D Cursor-Aware Terminal Chassis Tilt
-    const heroRight = document.querySelector(".hero-right-col");
-    const chassis = document.querySelector(".terminal-chassis");
-    if (heroRight && chassis) {
-      heroRight.addEventListener("mousemove", (e) => {
-        const rect = heroRight.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        const rotateX = -y * 6; // Max 3 deg
-        const rotateY = x * 7;
-        chassis.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
-      });
-
-      heroRight.addEventListener("mouseleave", () => {
-        chassis.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg)";
-      });
-    }
   }
 
   // ------------------------------------------------------------------------
