@@ -1,0 +1,134 @@
+/* Eudaimonia Terminal CSS - High Density, Monospaced Dark Theme */
+
+Screen {
+    background: #0d1117;
+    color: #e6edf3;
+    layout: vertical;
+}
+
+#header-bar {
+    dock: top;
+    height: 3;
+    background: #161b22;
+    color: #c9d1d9;
+    border-bottom: solid #30363d;
+    padding: 0 1;
+}
+
+#footer-bar {
+    dock: bottom;
+    height: 1;
+    background: #161b22;
+    color: #8b949e;
+    padding: 0 1;
+}
+
+#command-input-container {
+    dock: bottom;
+    height: 3;
+    background: #161b22;
+    border-top: solid #30363d;
+    padding: 0 1;
+    display: none;
+}
+
+#command-input-container.visible {
+    display: block;
+}
+
+#command-input {
+    background: #0d1117;
+    color: #58a6ff;
+    border: none;
+}
+
+#command-feedback {
+    height: 1;
+    color: #8b949e;
+}
+
+.screen-container {
+    height: 1fr;
+    padding: 0;
+}
+
+/* Data Tables */
+DataTable {
+    background: #0d1117;
+    color: #e6edf3;
+    border: none;
+    height: 1fr;
+}
+
+DataTable > .datatable--header {
+    background: #161b22;
+    color: #58a6ff;
+    text-style: bold;
+}
+
+DataTable > .datatable--cursor {
+    background: #1f6feb;
+    color: #ffffff;
+}
+
+/* Options Chain Specific */
+.chain-header {
+    height: 2;
+    background: #161b22;
+    color: #f0f6fc;
+    padding: 0 1;
+    border-bottom: solid #21262d;
+}
+
+/* Charts */
+#chart-canvas {
+    height: 1fr;
+    background: #0d1117;
+    color: #c9d1d9;
+    padding: 0 1;
+}
+
+#chart-toolbar {
+    height: 1;
+    background: #161b22;
+    color: #8b949e;
+    padding: 0 1;
+}
+
+/* Quote and Order Book */
+.quote-panel {
+    border: solid #30363d;
+    padding: 0 1;
+    height: 1fr;
+}
+
+.depth-panel {
+    border: solid #30363d;
+    padding: 0 1;
+    height: 1fr;
+}
+
+/* Color utilities */
+.green {
+    color: #3fb950;
+}
+
+.red {
+    color: #f85149;
+}
+
+.yellow {
+    color: #d29922;
+}
+
+.blue {
+    color: #58a6ff;
+}
+
+.muted {
+    color: #8b949e;
+}
+
+.bold {
+    text-style: bold;
+}

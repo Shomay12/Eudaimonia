@@ -1,0 +1,32 @@
+{
+  "name": "eudaimonia-terminal",
+  "version": "0.1.0",
+  "description": "Eudaimonia - Keyboard-First Market Intelligence and Options Trading Terminal for Indian Financial Markets (NSE & BSE)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev-server.js",
+    "start": "node scripts/dev-server.js",
+    "build": "node scripts/build.js",
+    "test": "node --test tests/*.test.js",
+    "lint": "node scripts/lint.js"
+  },
+  "keywords": [
+    "trading-terminal",
+    "market-intelligence",
+    "nse",
+    "bse",
+    "indian-markets",
+    "options-chain",
+    "black-scholes",
+    "greeks",
+    "nifty-50",
+    "order-book",
+    "candlestick-chart"
+  ],
+  "author": {
+    "name": "Shomay Singh Parihar",
+    "url": "https://github.com/shomay12"
+  },
+  "license": "MIT"
+}

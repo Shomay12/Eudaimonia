@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eudaimonia"
+version = "0.1.0"
+description = "Eudaimonia - Professional Terminal-Native Market-Data & Options Analytics Terminal for Indian Markets (NSE/BSE)"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "KJshomay12" }
+]
+keywords = ["trading", "terminal", "nse", "bse", "options-chain", "greeks", "market-data", "textual"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+dependencies = [
+    "textual>=0.80.0",
+    "rich>=13.0.0",
+    "pydantic>=2.0.0",
+    "scipy>=1.11.0",
+    "numpy>=1.25.0",
+    "aiosqlite>=0.19.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[project.scripts]
+eudaimonia = "eudaimonia.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["eudaimonia*"]
+exclude = ["data*", "tests*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+pythonpath = ["."]
+asyncio_default_fixture_loop_scope = "function"

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="4" fill="#0B0D0F"/>
+  <rect x="0.5" y="0.5" width="31" height="31" rx="3.5" stroke="#252A2F" fill="none"/>
+  <!-- Typographic E Terminal Monogram -->
+  <path d="M9 7h14v3.5H13v4h8.5v3.5H13v4h10V25H9V7z" fill="#F2F3F4"/>
+  <!-- Terminal Tick Accent -->
+  <rect x="20.5" y="14.5" width="3" height="3.5" fill="#56D39B"/>
+</svg>
